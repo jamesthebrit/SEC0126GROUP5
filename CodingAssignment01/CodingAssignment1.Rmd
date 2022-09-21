@@ -91,12 +91,30 @@ hist(starwars$height, breaks = "fd")
 summary(mtcars)
 
 ```
+Jessica: This above is using data from star wars
 
 # Question 2
 
 Perform bivariate analyses on the quantitative variables (direction, strength and form). Describe the linear association between all variables. 
 
 ```{r q2}
+cor(Insurance$Charges, Insurance$Smoker)
+
+plot(Insurance$Charges, Insurance$Smoker)
+
+
+
+reduced <- Insurance %>% 
+  select(Charges, Age, BMI, Female,Children,Smoker,WinterPark,WinterSprings,Oviedo)
+
+corrplot(cor(reduced),
+         type = "lower",
+         order = "hclust", 
+         tl.col = "black",
+         tl.srt = 45,
+         addCoef.col = "black",
+         diag = FALSE)
+
 
 ```
 
