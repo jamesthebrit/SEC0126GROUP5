@@ -188,6 +188,6 @@ An eager insurance representative comes back with a potential client. The client
 
 
 ```{r q4}
- "newPrediction <- data. frame (Age = 40, BMI = 30, Children = 1)
-predict (regressionmodel, newdata = newPrediction interval = confidence level = 95)"
+ newPrediction <- data.frame(Age = 40, BMI = 30, Children = 1)
+predict (model, newdata = newPrediction, interval = "confidence", level = .95)
 ```
