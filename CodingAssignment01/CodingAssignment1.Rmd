@@ -15,7 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r packages}
 # Put any packages you want here
-
+install.packages("gridExtra")
+install.packages("ggplot2")
+install.packages("ggpubr")
 ```
 
 
@@ -45,6 +47,9 @@ library(gtsummary)
 library(plotly)
 library(readxl)
 library(corrplot)
+library("gridExtra")
+library("ggplot2")
+library(ggpubr)
 
 Insurance <- read_excel("../Data/insurance_0126_Group5.xlsx",
                              col_types = c("numeric", "numeric","numeric","numeric", "numeric","numeric","numeric", "numeric","numeric"))
@@ -89,6 +94,27 @@ plot_ly(x = Insurance$BMI, type = "histogram", alpha = 0.6) %>%
   layout(title = 'Distribution of BMI',
          xaxis = list(title = 'Primary beneficiary’s body mass index (kg/m2)'),
          yaxis = list(title = 'Count'))
+
+
+ggp1 <- ggplot(Insurance, aes(Insurance$Age)) +         
+  geom_histogram(binwidth = 2 , col = 'black', fill = 'darkblue', alpha = 0.75)+
+  labs(title = "Distribution of Primary Beneficiary Age", x = 'Age') + theme_bw()
+ggp2 <- ggplot(Insurance, aes(Insurance$BMI)) +  
+  geom_histogram(binwidth = 2,col = 'black', fill = 'blue', alpha = 0.75)+
+  labs(title = "Distribution of Primary Beneficiary BMI", x = 'BMI') + theme_bw()
+ggp3 <- ggplot(Insurance, aes(Insurance$Children)) +  
+  geom_histogram(binwidth = 2,col = 'black', fill = 'lightblue', alpha = 0.50)+
+  labs(title = "Number of children covered by health insurance plan", x = 'Children')+ theme_bw()
+
+text1 <- paste("Text regarding age goes here break up sentences to make pretty")
+
+text.a <- ggparagraph(text = text1, face = "italic", size = 11, color = "black")
+
+text2 <- paste("Text regarind BMI here break up to make pretty")
+text.b <- ggparagraph(text = text2, face = "italic", size = 11, color = "black")
+
+ggarrange(ggp1, text.a, ncol = 2, ggp2, text.b, ggp3, align = "v", common.legend = TRUE)
+
 
 mean
 
