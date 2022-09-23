@@ -176,7 +176,8 @@ Generate a regression equation in the following form:
 $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
 
 ```{r q3}
-
+ model <- lm(Charges ~ Age + BMI + Children, data = Insurance)
+summary(model)
 ```
 
 also write out the regression cleanly in this document.
@@ -187,5 +188,6 @@ An eager insurance representative comes back with a potential client. The client
 
 
 ```{r q4}
-
+ "newPrediction <- data. frame (Age = 40, BMI = 30, Children = 1)
+predict (regressionmodel, newdata = newPrediction interval = confidence level = 95)"
 ```
