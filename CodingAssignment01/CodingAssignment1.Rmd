@@ -179,7 +179,8 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
  model <- lm(Charges ~ Age + BMI + Children, data = Insurance)
 summary(model)
 ```
-
+#Regression
+#Charges = -5962.00 + 346.50*Age + 133.00*BMI - 107.30*Children
 also write out the regression cleanly in this document.
 
 # Question 4
