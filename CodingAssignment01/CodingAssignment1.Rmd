@@ -56,20 +56,45 @@ Insurance <- read_excel("../Data/insurance_0126_Group5.xlsx",
 
 Perform univariate analyses on the quantitative variables (center, shape, spread). Include descriptive statistics, and histograms. Be sure to use terms discussed in class such as bimodal, skewed left, etc.
 
+
 ```{r q1}
-CENTER
+
+str(Insurance)
+
+Insurance$Female <- NULL 
+Insurance$WinterPark <- NULL
+Insurance$WinterSprings <- NULL
+Insurance$Oviedo <- NULL
+Insurance$Smoker <- NULL
+
+Insurance %>%
+tbl_summary(statistic = list(all_continuous() ~ c("{mean} ({sd})",
+"{median} ({p25}, {p75})",
+"{min}, {max}"),
+all_categorical() ~ "{n} / {N} ({p}%)"),
+type = all_continuous() ~ "continuous2"
+)
+
+plot_ly(x = Insurance$Age, type = "histogram", alpha = 0.6) %>% 
+  layout(title = 'Distribution of Age',
+         xaxis = list(title = 'Age of the primary beneficiary'),
+         yaxis = list(title = 'Count'))
+
+plot_ly(x = Insurance$Children, type = "histogram", alpha = 0.6) %>% 
+  layout(title = 'Distribution of Children',
+         xaxis = list(title = 'Number of children covered by health insurance plan (includes other dependents as well)'),
+         yaxis = list(title = 'Count'))
+
+plot_ly(x = Insurance$BMI, type = "histogram", alpha = 0.6) %>% 
+  layout(title = 'Distribution of BMI',
+         xaxis = list(title = 'Primary beneficiary’s body mass index (kg/m2)'),
+         yaxis = list(title = 'Count'))
+
 mean
 
 median
 
-getModes <- function(x) {
-  ux <- unique(x)
-  tab <- tabulate(match(x, ux))
-  ux[tab == max(tab)]
-}
 
-
-getModes(grades)
 
 SHAPE
 
