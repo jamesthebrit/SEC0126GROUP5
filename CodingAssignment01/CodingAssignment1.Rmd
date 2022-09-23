@@ -14,10 +14,27 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r packages}
-# Put any packages you want here
+install.packages("readxl")
+install.packages("girdExtra", repos = "http://cran.us.r-project.org")
 install.packages("gridExtra")
 install.packages("ggplot2")
 install.packages("ggpubr")
+install.packages("swirl")
+install.packages("jtools")
+
+library(readxl)
+library(tidyverse)
+library(gt)
+library(gtsummary)
+library(plotly)
+library(readxl)
+library(corrplot)
+library("gridExtra")
+library("ggplot2")
+library(ggpubr)
+library(dplyr)
+library(car)
+library(jtools)
 ```
 
 
@@ -40,16 +57,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 ```{r dataset, include=FALSE}
 # Bring in the dataset here
-library(readxl)
-library(tidyverse)
-library(gt)
-library(gtsummary)
-library(plotly)
-library(readxl)
-library(corrplot)
-library("gridExtra")
-library("ggplot2")
-library(ggpubr)
+
 
 Insurance <- read_excel("../Data/insurance_0126_Group5.xlsx",
                              col_types = c("numeric", "numeric","numeric","numeric", "numeric","numeric","numeric", "numeric","numeric"))
@@ -116,31 +124,6 @@ text.b <- ggparagraph(text = text2, face = "italic", size = 11, color = "black")
 ggarrange(ggp1, text.a, ncol = 2, ggp2, text.b, ggp3, align = "v", common.legend = TRUE)
 
 
-mean
-
-median
-
-
-
-SHAPE
-
-grades <- rnorm(100,mean = 75, sd = 5 )
-hist(grades)
-
-SPREAD
-var(starwars$height)
-
-var(starwars$height, na.rm = TRUE)
-sd(starwars$height, na.rm = TRUE)
-IQR(starwars$height, na.rm = TRUE)
-range(starwars$height, na.rm = TRUE)
-
-boxplot(starwars$height)
-
-hist(starwars$height, breaks = "fd")
-
-summary(mtcars)
-
 ```
 Jessica: This above is using data from star wars
 
@@ -149,22 +132,6 @@ Jessica: This above is using data from star wars
 Perform bivariate analyses on the quantitative variables (direction, strength and form). Describe the linear association between all variables. 
 
 ```{r q2}
-cor(Insurance$Charges, Insurance$Smoker)
-
-plot(Insurance$Charges, Insurance$Smoker)
-
-
-
-reduced <- Insurance %>% 
-  select(Charges, Age, BMI, Female,Children,Smoker,WinterPark,WinterSprings,Oviedo)
-
-corrplot(cor(reduced),
-         type = "lower",
-         order = "hclust", 
-         tl.col = "black",
-         tl.srt = 45,
-         addCoef.col = "black",
-         diag = FALSE)
 
 
 ```
