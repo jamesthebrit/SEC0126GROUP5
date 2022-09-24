@@ -83,40 +83,98 @@ type = all_continuous() ~ "continuous2"
 )
 ```
 
-### Center (Mode) & Shape
+### Center (Mode) & Shape {.tabset .tabset-pills}
+
+#### Distribution of Primary Beneficiary Age
+The below output is the mode for Primary Beneficiary Age
+
 ```{r, echo=FALSE}
 
+getModesAge <- function(x) {
+  ux <- unique(x)
+  tab <- tabulate(match(x, ux))
+  ux[tab == max(tab)]
+}
+getModesAge(Insurance$Age)
+
+```
+
+```{r, echo=FALSE}
 ggp1 <- ggplot(Insurance, aes(Age)) +         
-  geom_histogram(binwidth = 2 , col = 'black', fill = 'Blue', alpha = 0.75, bins = 45)+ 
-  labs(title = "Distribution of Primary Beneficiary Age", x = 'Age', y= NULL) 
-ggp2 <- ggplot(Insurance, aes(BMI)) +  
-  geom_histogram(binwidth = 2,col = 'black', fill = 'Red', alpha = 0.75, bins = 45)+
-  labs(title = "Distribution of Primary Beneficiary BMI", x = 'BMI', y= NULL)
-ggp3 <- ggplot(Insurance, aes(Children)) +  
-  geom_histogram(binwidth = 2,col = 'black', fill = 'Green', alpha = 0.75, bins = 15)+
-  labs(title = "Distribution of Dependents", x = 'Children', y= NULL)
+  geom_histogram(aes(y = ..density..), binwidth = 2 , col = 'black', fill = 'MidnightBlue', alpha = 0.75, bins = 45)+
+  geom_density(color = "#000000", fill = "#FAF0E6", alpha = 0.4)+
+  labs(x = 'Age', y= NULL) 
 
 text1 <- paste("Text regarding age goes here break up sentences to make pretty")
 text.a <- ggparagraph(text = text1, face = "italic", size = 8, color = "black")
 
+ggarrange(ggp1, text.a, ncol = 1, nrow =2 )
+
+```
+
+#### Distribution of Primary Beneficiary BMI
+The below output is the mode for Primary Beneficiary BMI
+```{r, echo=FALSE}
+getModesBMI <- function(x) {
+  ux <- unique(x)
+  tab <- tabulate(match(x, ux))
+  ux[tab == max(tab)]
+}
+getModesBMI(Insurance$BMI)
+
+```
+
+```{r, echo=FALSE}
+ggp2 <- ggplot(Insurance, aes(BMI)) +  
+  geom_histogram(aes(y = ..density..), binwidth = 2,col = 'black', fill = 'CadetBlue', alpha = 0.75, bins = 45)+
+  geom_density(color = "#000000", fill = "#FAF0E6", alpha = 0.5)+
+  labs(x = 'BMI', y= NULL)
+
 text2 <- paste("Text regarding BMI here break up to make pretty")
 text.b <- ggparagraph(text = text2, face = "italic", size = 8, color = "black")
+
+ggarrange(ggp2, text.b, ncol = 1, nrow =2 )
+```
+
+#### Distribution of Dependents
+The below output is the mode for Dependents per Insurance Policy
+```{r, echo=FALSE}
+getModesChildren <- function(x) {
+  ux <- unique(x)
+  tab <- tabulate(match(x, ux))
+  ux[tab == max(tab)]
+}
+getModesChildren(Insurance$Children)
+
+```
+
+```{r, echo=FALSE}
+ggp3 <- ggplot(Insurance, aes(Children)) +  
+  geom_histogram(aes(y = ..density..), binwidth = 0.5,col = 'black', fill = 'SeaGreen', alpha = 0.75, bins = 7)+
+  geom_density(color = "#000000", fill = "#FAF0E6", alpha = 0.5)+
+  labs(x = 'Children', y= NULL)
 
 text3 <- paste("Text regarding children here break up to make pretty")
 text.c <- ggparagraph(text = text3, face = "italic", size = 8, color = "black")
 
-ggarrange(ggp1, text.a, ggp2, text.b, ggp3, text.c, ncol = 2, nrow = 3)
-
+ggarrange(ggp3, text.c, ncol = 1, nrow =2 )
 ```
 
-### Spread
+### Spread {.tabset .tabset-pills}
+
+#### Spead of Age 
 ```{r, echo=FALSE}
 boxplot(Insurance$Age, main="Figure 1.4", xlab="Spread of Age", ylab="Years", col="Blue")
+```
 
+#### Spread of BMI 
+```{r, echo=FALSE}
 boxplot(Insurance$BMI, main="Figure 1.5", xlab="Spread of BMI", ylab="Body Mass Index", col="Red")
+```
 
+#### Spread of Children
+```{r, echo=FALSE}
 boxplot(Insurance$Children, main="Figure 1.6", xlab="Spread of Children", ylab="Number of Dependents",  col="Green")
-
 ```
 
 
@@ -128,11 +186,20 @@ Perform bivariate analyses on the quantitative variables (direction, strength an
 Quantitative Variable Correlations:
 
 ### Relationship 
-```{r}
+Age - Charges | The strongest positive correlation is between the age of customers and their charges. As per their correlation relationship, which is 0.411474, states that this is a positive and moderate correlation. The grouping within the scatterplot confirms this.
+```{r, echo=FALSE}
 cor(Insurance$Charges, Insurance$Age)
+```
+BMI - Charges | The correlation between BMI and Charges is positive but weak at 0.1395063. The grouping is sporadic but does follow a slight grouping pattern.
+
+```{r, echo=FALSE}
 cor(Insurance$Charges, Insurance$BMI)
+```
+Children - Charges | The correlation between the number of dependents and total annual charges is the weakest correlation. Albeit that it is positive the correlation is .0149766. After reviewing the grouping it almost suggests having less children is leading to higher annual charges but the population tends to be skewed towards
+```{r, echo=FALSE}
 cor(Insurance$Charges, Insurance$Children)
 ```
+
 
 ### Strength 
 ```{r, echo=FALSE}
@@ -154,7 +221,7 @@ corrplot(cor(reduced),
 ```
 
 ### Form 
-```{r}
+```{r, echo=FALSE}
 
 plot(Insurance$Age, Insurance$Charges, main="2.1 Relationship of Age and Expenditures", xlab="Customer's Age", ylab="Total Medical Expenditures", col="Blue")
 plot(Insurance$BMI, Insurance$Charges, main="2.2 Relationship of BMI and Expenditures", xlab="Customer's of Body Mass Index", ylab="Total Medical Expenditures", col="Red")
@@ -167,9 +234,13 @@ plot(Insurance$Children, Insurance$Charges, main="2.3 Relationship of Depenents 
 
 Generate a regression equation in the following form:
 
-$$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
+                        $Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$
 
-```{r q3}
+### Regression Equation for Annual Medical Expenses
+
+Based off our our model summary from the data provided our equation is as follows for annual charges; an intercept value of 
+-$5,962.00 with a coefficient value for age set at $346.50, BMI at $133.00, and children at $107.30.
+```{r, echo=FALSE}
  model <- lm(Charges ~ Age + BMI + Children, data = Insurance)
 summ(model)
 ```
@@ -180,8 +251,10 @@ $$Charges = -5962.00 + 346.50(Age) + 133.00(BMI) - 107.30(Children)$$
 
 An eager insurance representative comes back with a potential client. The client is 40, their BMI is 30, and they have one dependent. Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
 
-
-```{r q4}
+### New Prediction for Medical Expenses
+```{r, echo=FALSE}
  newPrediction <- data.frame(Age = 40, BMI = 30, Children = 1)
 predict (model, newdata = newPrediction, interval = "confidence", level = .95)
 ```
+
+As per our regression equation, this Florida health insurance company can expect charges for this individual to annually be $11,782.35. However with a 95% confidence interval the lower bound of charges accumulated would be $8,598.57 to $14,966.13 annually.
