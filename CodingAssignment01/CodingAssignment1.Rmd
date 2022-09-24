@@ -1,6 +1,6 @@
 ---
 title: "Coding Assignment 1"
-author: "Team N"
+author: "Team 5"
 date: "Due: 2021-09-29 23:59"
 output: 
   html_document:
@@ -13,13 +13,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r packages}
-install.packages("girdExtra", repos = "http://cran.us.r-project.org")
-install.packages("gridExtra")
-install.packages("ggplot2")
-install.packages("ggpubr")
-install.packages("swirl")
-install.packages("jtools")
+```{r packages, include=FALSE}
+
 
 library(readxl)
 library(tidyverse)
@@ -87,67 +82,72 @@ all_categorical() ~ "{n} / {N} ({p}%)"),
 type = all_continuous() ~ "continuous2"
 )
 
-plot_ly(x = Insurance$Age, type = "histogram", alpha = 0.6) %>% 
-  layout(title = 'Distribution of Age',
-         xaxis = list(title = 'Age of the primary beneficiary'),
-         yaxis = list(title = 'Count'))
 
-plot_ly(x = Insurance$Children, type = "histogram", alpha = 0.6) %>% 
-  layout(title = 'Distribution of Children',
-         xaxis = list(title = 'Number of children covered by health insurance plan (includes other dependents as well)'),
-         yaxis = list(title = 'Count'))
-
-plot_ly(x = Insurance$BMI, type = "histogram", alpha = 0.6) %>% 
-  layout(title = 'Distribution of BMI',
-         xaxis = list(title = 'Primary beneficiary’s body mass index (kg/m2)'),
-         yaxis = list(title = 'Count'))
-
-
-ggp1 <- ggplot(Insurance, aes(Insurance$Age)) +         
-  geom_histogram(binwidth = 2 , col = 'black', fill = 'darkblue', alpha = 0.75)+
-  labs(title = "Distribution of Primary Beneficiary Age", x = 'Age') + theme_bw()
-ggp2 <- ggplot(Insurance, aes(Insurance$BMI)) +  
-  geom_histogram(binwidth = 2,col = 'black', fill = 'blue', alpha = 0.75)+
-  labs(title = "Distribution of Primary Beneficiary BMI", x = 'BMI') + theme_bw()
-ggp3 <- ggplot(Insurance, aes(Insurance$Children)) +  
-  geom_histogram(binwidth = 2,col = 'black', fill = 'lightblue', alpha = 0.50)+
-  labs(title = "Number of children covered by health insurance plan", x = 'Children')+ theme_bw()
+ggp1 <- ggplot(Insurance, aes(Age)) +         
+  geom_histogram(binwidth = 2 , col = 'black', fill = 'Blue', alpha = 0.75)+
+  labs(title = "1.1 Distribution of Primary Beneficiary Age", x = 'Age') + theme_bw()
+ggp2 <- ggplot(Insurance, aes(BMI)) +  
+  geom_histogram(binwidth = 2,col = 'black', fill = 'Red', alpha = 0.75)+
+  labs(title = "1.2 Distribution of Primary Beneficiary BMI", x = 'BMI') + theme_bw()
+ggp3 <- ggplot(Insurance, aes(Children)) +  
+  geom_histogram(binwidth = 2,col = 'black', fill = 'Green', alpha = 0.50)+
+  labs(title = "1.3 Number of children covered by health insurance plan", x = 'Children')+ theme_bw()
 
 text1 <- paste("Text regarding age goes here break up sentences to make pretty")
-
 text.a <- ggparagraph(text = text1, face = "italic", size = 11, color = "black")
 
-text2 <- paste("Text regarind BMI here break up to make pretty")
+text2 <- paste("Text regarding BMI here break up to make pretty")
 text.b <- ggparagraph(text = text2, face = "italic", size = 11, color = "black")
 
-ggarrange(ggp1, text.a, ncol = 2, ggp2, text.b, ggp3, align = "v", common.legend = TRUE)
+text3 <- paste("Text regarding children here break up to make pretty")
+text.c <- ggparagraph(text = text3, face = "italic", size = 11, color = "black")
+
+ggarrange(ggp1, text.a, ncol = 2, ggp2, text.b, ggp3, text.c, align = "v", common.legend = TRUE)
+
+boxplot(Insurance$Age, main="Figure 1.4", xlab="Spread of Age", ylab="Years", col="Blue")
+
+boxplot(Insurance$BMI, main="Figure 1.5", xlab="Spread of BMI", ylab="Body Mass Index", col="Red")
+
+boxplot(Insurance$Children, main="Figure 1.6", xlab="Spread of Children", ylab="Number of Dependents",  col="Green")
 
 
 ```
+## Answer 1:
+
+
+
 
 # Question 2
 
 Perform bivariate analyses on the quantitative variables (direction, strength and form). Describe the linear association between all variables. 
 
+
+Quantitative Variable Correlations:
 ```{r q2}
+cor(Insurance$Charges, Insurance$Age)
+cor(Insurance$Charges, Insurance$BMI)
+cor(Insurance$Charges, Insurance$Children)
 
-cor(Insurance$Charges, Insurance$Smoker)
-
-plot(Insurance$Charges, Insurance$Smoker)
-
-
+plot(Insurance$Age, Insurance$Charges, main="2.1 Relationship of Age and Expenditures", xlab="Customer's Age", ylab="Total Medical Expenditures", col="Blue")
+plot(Insurance$BMI, Insurance$Charges, main="2.2 Relationship of BMI and Expenditures", xlab="Customer's of Body Mass Index", ylab="Total Medical Expenditures", col="Red")
+plot(Insurance$Children, Insurance$Charges, main="2.3 Relationship of Depenents and Expenditures", xlab="Number of Dependents", ylab="Total Medical Expenditures", col="Green")
 
 reduced <- Insurance %>% 
-  select(Charges, Age, BMI, Female,Children,Smoker,WinterPark,WinterSprings,Oviedo)
+  select(Charges,Age,BMI,Children)
+
 
 corrplot(cor(reduced),
+         main = "2.4 Correlation Plot",
          type = "lower",
          order = "hclust", 
          tl.col = "black",
          tl.srt = 45,
          addCoef.col = "black",
-         diag = FALSE)
+         diag = FALSE,
+         mar=c(0,0,1,0))
 ```
+
+
 
 # Question 3
 
@@ -157,11 +157,10 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
 
 ```{r q3}
  model <- lm(Charges ~ Age + BMI + Children, data = Insurance)
-summary(model)
+summ(model)
 ```
-#Regression
-#Charges = -5962.00 + 346.50*Age + 133.00*BMI - 107.30*Children
-also write out the regression cleanly in this document.
+$$Charges = -5962.00 + 346.50(Age) + 133.00(BMI) - 107.30(Children)$$
+
 
 # Question 4
 
