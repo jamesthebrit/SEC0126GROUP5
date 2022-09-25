@@ -77,11 +77,13 @@ The variables listed below were part of our analysis and are included in the fol
 **Figure 1.1**
 <br>
 <br>
+
   1. **Charges**: Primary beneficiaries paid between $2,494 and $55,135. 
 
-  2. **Age**: The data output confirms that the data for Age is skewed to the right as the Mean is larger than the Median.
+  2. **Age**: The data output confirms that the data for Age is skewed to the right as the Mean is larger than the
+  Median.
 
-  3. **BMI**: The data output for beneficiaries BMI is symmetrical as the Mean and Median are almost the same number. Identifying the mode will help validate this observation.
+  3. **BMI**: The data output for beneficiaries BMI is symmetrical as the Mean and Median are almost the same number.  Identifying the mode will help validate this observation.
 
   4. **Children**: 34% of the primary beneficiaries did not have dependents.
 <br>
