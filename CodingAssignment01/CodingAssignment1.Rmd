@@ -298,11 +298,26 @@ corrplot(cor(reduced),
 
 ```
 
-### Form 
-```{r, echo=FALSE}
+### Form {.tabset .tabset-pills}
 
+#### Age and Expenditures 
+<br>
+sample for 2.2
+```{r, echo=FALSE}
 plot(Insurance$Age, Insurance$Charges, main="2.2 Relationship of Age and Expenditures", xlab="Customer's Age", ylab="Total Medical Expenditures", col="Blue")
+```
+
+#### BMI and Expenditures
+<br>
+sample for 2.3 
+```{r, echo=FALSE}
 plot(Insurance$BMI, Insurance$Charges, main="2.3 Relationship of BMI and Expenditures", xlab="Customer's of Body Mass Index", ylab="Total Medical Expenditures", col="Red")
+```
+
+#### Depenents and Expenditures
+<br>
+sample for 2.4
+```{r, echo=FALSE}
 plot(Insurance$Children, Insurance$Charges, main="2.4 Relationship of Depenents and Expenditures", xlab="Number of Dependents", ylab="Total Medical Expenditures", col="Green")
 ```
 
