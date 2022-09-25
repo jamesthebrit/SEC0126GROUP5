@@ -72,19 +72,7 @@ Insurance$Smoker <- NULL
 ```
 
 ### Center (Mean, Median)
-The below summary of statistical information regarding this data set is usful for our analysis regarding each variable. 
 
-1. Charges:
-
-2. Age:
-  - The data output confirms that the data for Age is skewed to the right as the Mean is larger than the Median.
-
-3. BMI
-  - The data output for beneficiaries BMI is symmetrical as the Mean and Media are almost the same number. By looking at the mode will help validate this observation.  
-  
-4. Children
-  - 
-  
 ```{r, echo=FALSE}
 Insurance %>%
 tbl_summary(statistic = list(all_continuous() ~ c("{mean} ({sd})",
@@ -113,13 +101,15 @@ getModesAge(Insurance$Age)
 
 ```{r, echo=FALSE, warning=FALSE}
 ggp1 <- ggplot(Insurance, aes(Age)) +         
-  geom_histogram(col = 'black', fill = 'MidnightBlue', alpha = 0.75, bins = 20, binwidth = 1)+
-  labs(x = 'Age', y= NULL)
+  geom_histogram(aes(y = ..density..), col = 'black', fill = 'MidnightBlue', alpha = 0.75, bins = 30, binwidth = 1)+
+  labs(x = 'Age', y= NULL)+
+  xlim(21, 68)
 
-text1 <- paste("The above Histogram validates that the Primary Beneficiaries Age data is bimodal with two peaks in the graph. ")
+text1 <- paste("The above Histogram validates that the Age data is bimodal with two peaks in the graph. The   ")
 text.a <- ggparagraph(text = text1, face = "italic", size = 12, color = "black")
 
-ggarrange(ggp1, text.a, ncol = 1, nrow = 2 )
+ggarrange(ggp1, text.a, ncol = 1, nrow =2 )
+
 ```
 
 #### Distribution of Primary Beneficiary BMI
@@ -136,14 +126,14 @@ getModesBMI(Insurance$BMI)
 
 ```{r, echo=FALSE, warning=FALSE}
 ggp2 <- ggplot(Insurance, aes(BMI)) +  
-  geom_histogram(binwidth = 1,col = 'black', fill = 'CadetBlue', na.rm = TRUE, alpha = 0.75, bins = 50)+
+  geom_histogram(aes(y = ..density..), binwidth = 2,col = 'black', fill = 'CadetBlue', alpha = 0.75, bins = 50)+
   labs(x = 'BMI', y= NULL)+
-  xlim(15, 45)
+  xlim(10, 45)
 
 text2 <- paste("Text regarding BMI here break up to make pretty")
 text.b <- ggparagraph(text = text2, face = "italic", size = 12, color = "black")
 
-ggarrange(ggp2, text.b, ncol = 1, nrow = 2 )
+ggarrange(ggp2, text.b, ncol = 1, nrow =2 )
 ```
 
 #### Distribution of Dependents
@@ -167,7 +157,7 @@ ggp3 <- ggplot(Insurance, aes(Children)) +
 text3 <- paste("Text regarding children here break up to make pretty")
 text.c <- ggparagraph(text = text3, face = "italic", size = 12, color = "black")
 
-ggarrange(ggp3, text.c, ncol = 1, nrow = 2 )
+ggarrange(ggp3, text.c, ncol = 1, nrow =2 )
 ```
 
 ### Spread {.tabset .tabset-pills}
