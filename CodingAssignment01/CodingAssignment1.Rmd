@@ -301,15 +301,16 @@ corrplot(cor(reduced),
 ### Form {.tabset .tabset-pills}
 
 #### Age and Expenditures 
+<br> 
+There is a slightly strong positive association in the linear relationship between Medical expenditures and the customers age.
 <br>
-sample for 2.2
 ```{r, echo=FALSE}
 plot(Insurance$Age, Insurance$Charges, main="2.2 Relationship of Age and Expenditures", xlab="Customer's Age", ylab="Total Medical Expenditures", col="Blue")
 ```
 
 #### BMI and Expenditures
 <br>
-sample for 2.3 
+The linear relationship between medical expenses and BMI appear to have a weak positive association.
 ```{r, echo=FALSE}
 plot(Insurance$BMI, Insurance$Charges, main="2.3 Relationship of BMI and Expenditures", xlab="Customer's of Body Mass Index", ylab="Total Medical Expenditures", col="Red")
 ```
