@@ -55,13 +55,13 @@ Insurance <- read_excel("../Data/insurance_0126_Group5.xlsx",
                              col_types = c("numeric", "numeric","numeric","numeric", "numeric","numeric","numeric", "numeric","numeric"))
 ```
 
-First, we should inspect the data to determine if all variables within the data set to ensure they make sense. The below output of observations and variables indicate that there are categorical and Quantitative variables. 
+First, we should inspect the data to determine which variables should be used within the data set. Below is the output of observations and variables which indicate that there are categorical and Quantitative variables. 
 
 ```{r, echo=FALSE}
 str(Insurance)
 ```
 
-Below is the below code chunk will be removing the categorical data from summaries for our analysis. 
+The code chunk below will remove the categorical variables (gender, smoker, cities) that we can ignore for this assignment from our analysis. 
 
 ```{r}
 Insurance$Female <- NULL 
@@ -72,18 +72,15 @@ Insurance$Smoker <- NULL
 ```
 
 ### Center (Mean, Median)
-The below summary of statistical information regarding this data set is usful for our analysis regarding each variable. 
+The variables listed below were part of our analysis and included in the following Summary of Statistical Information.
 
-1. Charges:
+1. **Charges**: Primary beneficiaries paid between $2,494 and $55,135.   
 
-2. Age:
-  - The data output confirms that the data for Age is skewed to the right as the Mean is larger than the Median.
+2. **Age**:  The data output confirms that the data for Age is skewed to the right as the Mean is larger than the Median.
 
-3. BMI
-  - The data output for beneficiaries BMI is symmetrical as the Mean and Media are almost the same number. By looking at the mode will help validate this observation.  
+3. **BMI**:  The data output for beneficiaries BMI is symmetrical as the Mean and Median are almost the same number. By looking at the mode will help validate this observation.  
   
-4. Children
-  - 
+4. **Children**: Most of the primary beneficiaries (34%) did not have dependents.
   
 ```{r, echo=FALSE}
 Insurance %>%
