@@ -56,13 +56,13 @@ Insurance <- read_excel("../Data/insurance_0126_Group5.xlsx",
 ```
 
 First, we should inspect the data to determine which variables should be used within the data set. Below is the output of observations and variables which indicate that there are categorical and Quantitative variables. 
-
+<br>
 ```{r, echo=FALSE}
 str(Insurance)
 ```
 
 For this assignment, we will ignore the categorical variables.  The code chunk below will remove gender, smoker, and cities from the data set. 
-
+<br>
 ```{r}
 Insurance$Female <- NULL 
 Insurance$WinterPark <- NULL
@@ -74,14 +74,19 @@ Insurance$Smoker <- NULL
 ### Center (Mean, Median)
 The variables listed below were part of our analysis and are included in the following *Summary of Statistical Information*.
 
-1. **Charges**: Primary beneficiaries paid between $2,494 and $55,135.   
+**Figure 1.1**
+<br>
+<br>
+  1. **Charges**: Primary beneficiaries paid between $2,494 and $55,135. 
 
-2. **Age**:  The data output confirms that the data for Age is skewed to the right as the Mean is larger than the Median.
+  2. **Age**: The data output confirms that the data for Age is skewed to the right as the Mean is larger than the Median.
 
-3. **BMI**:  The data output for beneficiaries BMI is symmetrical as the Mean and Median are almost the same number. Identifying the mode will help validate this observation.  
-  
-4. **Children**: 34% of the primary beneficiaries did not have dependents.
-  
+  3. **BMI**: The data output for beneficiaries BMI is symmetrical as the Mean and Median are almost the same number. Identifying the mode will help validate this observation.
+
+  4. **Children**: 34% of the primary beneficiaries did not have dependents.
+<br>
+<br>
+
 ```{r, echo=FALSE}
 Insurance %>%
 tbl_summary(statistic = list(all_continuous() ~ c("{mean} ({sd})",
@@ -107,13 +112,15 @@ getModesAge <- function(x) {
 getModesAge(Insurance$Age)
 
 ```
-
+<br>
+**Figure 1.2 : Histogram of Primary Beneficiary Age Distribution**
+<br>
 ```{r, echo=FALSE, warning=FALSE}
 ggp1 <- ggplot(Insurance, aes(Age)) +         
   geom_histogram(col = 'black', fill = 'MidnightBlue', alpha = 0.75, bins = 20, binwidth = 1)+
   labs(x = 'Age', y= NULL)
 
-text1 <- paste("The above Histogram validates that the Primary Beneficiaries Age data is bimodal with two peaks in the graph. ")
+text1 <- paste("The above Histogram displays that the Primary Beneficiaries Age data is Symmetric bimodal distribution with two centers being at 27 and 45 years.")
 text.a <- ggparagraph(text = text1, face = "italic", size = 12, color = "black")
 
 ggarrange(ggp1, text.a, ncol = 1, nrow = 2 )
@@ -130,14 +137,16 @@ getModesBMI <- function(x) {
 getModesBMI(Insurance$BMI)
 
 ```
-
+<br>
+**Figure 1.3 : Histogram of Primary Beneficiary BMI Distribution**
+<br>
 ```{r, echo=FALSE, warning=FALSE}
 ggp2 <- ggplot(Insurance, aes(BMI)) +  
   geom_histogram(binwidth = 1,col = 'black', fill = 'CadetBlue', na.rm = TRUE, alpha = 0.75, bins = 50)+
   labs(x = 'BMI', y= NULL)+
   xlim(15, 45)
 
-text2 <- paste("Symmetrical Unimodal distribution with the center at 30.2")
+text2 <- paste("The above Histogram displays that the Primary Beneficiaries BMI data is Symmetrical Unimodal distribution with the center at 30.2")
 text.b <- ggparagraph(text = text2, face = "italic", size = 12, color = "black")
 
 ggarrange(ggp2, text.b, ncol = 1, nrow = 2 )
@@ -154,14 +163,16 @@ getModesChildren <- function(x) {
 getModesChildren(Insurance$Children)
 
 ```
-
+<br>
+**Figure 1.4 : Histogram of Distribution for Policy Dependents**
+<br>
 ```{r, echo=FALSE, warning=FALSE}
 ggp3 <- ggplot(Insurance, aes(Children)) +  
   geom_histogram(aes(y = ..density..), binwidth = 0.5,col = 'black', fill = 'SeaGreen', alpha = 0.75, bins = 50)+
   labs(x = 'Children', y= NULL)+
    xlim(-1, 6)
 
-text3 <- paste("Right-Skewed distribution that is positively-skewed")
+text3 <- paste("The above Histogram displays that the Primary Beneficiaries Dependents data is Right-Skewed distribution that is positively-skewed.")
 text.c <- ggparagraph(text = text3, face = "italic", size = 12, color = "black")
 
 ggarrange(ggp3, text.c, ncol = 1, nrow = 2 )
@@ -170,18 +181,75 @@ ggarrange(ggp3, text.c, ncol = 1, nrow = 2 )
 ### Spread {.tabset .tabset-pills}
 
 #### Spead of Age 
+
+<br>
+
+**Figure 1.5 : Spread of Age**
+
+The boxplot shows us many details of the spread of the age.
+
+  - Median is 40
+  
+  - Lower (1st) quartile is 30
+  
+  - Upper (3rd) quartile is 52
+  
+  - Maximum at 64
+  
+  - Minimum at 24
+  
+  - No outliers
+
 ```{r, echo=FALSE}
-boxplot(Insurance$Age, main="Figure 1.4 - Spread of Age", xlab="Spread of Age", ylab="Years", col="Blue")
+boxplot(Insurance$Age, xlab="Spread of Age", ylab="Years", col="Blue")
 ```
 
-#### Spread of BMI 
+#### Spread of BMI
+
+<br>
+
+**Figure 1.6 : Spread of BMI**
+
+The boxplot shows us many details of the spread of the BMI.
+
+  - Median is about 28
+  
+  - Lower (1st) quartile is 25
+  
+  - Upper (3rd) quartile is 33
+  
+  - Maximum at 42
+  
+  - Minimum at 16
+  
+  - No outliers
+
 ```{r, echo=FALSE}
-boxplot(Insurance$BMI, main="Figure 1.5", xlab="Spread of BMI", ylab="Body Mass Index", col="Red")
+boxplot(Insurance$BMI, xlab="Spread of BMI", ylab="Body Mass Index", col="Red")
 ```
 
 #### Spread of Children
+
+<br>
+
+**Figure 1.7 : Spread of Dependents**
+
+The boxplot shows us many details of the spread of the Children.
+
+  - Median is 1
+  
+  - Lower (1st) quartile is 0
+  
+  - Upper (3rd) quartile is 2
+  
+  - Maximum at 5
+  
+  - Minimum at 0
+  
+  - No outliers
+
 ```{r, echo=FALSE}
-boxplot(Insurance$Children, main="Figure 1.6", xlab="Spread of Children", ylab="Number of Dependents",  col="Green")
+boxplot(Insurance$Children, xlab="Spread of Dependents", ylab="Number of Dependents",  col="Green")
 ```
 
 
@@ -208,7 +276,9 @@ cor(Insurance$Charges, Insurance$Children)
 ```
 
 
-### Strength 
+### Strength
+<br>
+**Figure 2.1 : Correlation Plot**
 ```{r, echo=FALSE}
 
 reduced <- Insurance %>% 
@@ -216,7 +286,6 @@ reduced <- Insurance %>%
 
 
 corrplot(cor(reduced),
-         main = "2.4 Correlation Plot",
          type = "lower",
          order = "hclust", 
          tl.col = "black",
@@ -230,9 +299,9 @@ corrplot(cor(reduced),
 ### Form 
 ```{r, echo=FALSE}
 
-plot(Insurance$Age, Insurance$Charges, main="2.1 Relationship of Age and Expenditures", xlab="Customer's Age", ylab="Total Medical Expenditures", col="Blue")
-plot(Insurance$BMI, Insurance$Charges, main="2.2 Relationship of BMI and Expenditures", xlab="Customer's of Body Mass Index", ylab="Total Medical Expenditures", col="Red")
-plot(Insurance$Children, Insurance$Charges, main="2.3 Relationship of Depenents and Expenditures", xlab="Number of Dependents", ylab="Total Medical Expenditures", col="Green")
+plot(Insurance$Age, Insurance$Charges, main="2.2 Relationship of Age and Expenditures", xlab="Customer's Age", ylab="Total Medical Expenditures", col="Blue")
+plot(Insurance$BMI, Insurance$Charges, main="2.3 Relationship of BMI and Expenditures", xlab="Customer's of Body Mass Index", ylab="Total Medical Expenditures", col="Red")
+plot(Insurance$Children, Insurance$Charges, main="2.4 Relationship of Depenents and Expenditures", xlab="Number of Dependents", ylab="Total Medical Expenditures", col="Green")
 ```
 
 
