@@ -280,7 +280,7 @@ cor(Insurance$Charges, Insurance$Children)
 
 ### Strength
 <br>
-**Figure 2.1 : Correlation Plot**]
+**Figure 2.1 : Correlation Plot**
 
 The below correlation plot displays that the strongest correlation is between Charges and the Primary Beneficiaries Age. 
 ```{r, echo=FALSE}
@@ -329,14 +329,13 @@ scatterplotMatrix(Insurance)
 
 #### Depenents and Expenditures
 <br>
-sample for 2.4
+There is no linear relationship between medical expenses and dependents. From our earlier analysis, the correlation is slightly positive and can be visually explained from the Scatterplot Matrix below. 
 
 ```{r, echo=FALSE}
 plot(Insurance$Children, Insurance$Charges, main="2.4 Relationship of Depenents and Expenditures", xlab="Number of Dependents", ylab="Total Medical Expenditures", col="Green")
 ```
 <br>
 <br>
-
 ```{r, echo=FALSE}
 scatterplotMatrix(Insurance)
 ```
