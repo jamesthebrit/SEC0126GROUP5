@@ -61,7 +61,7 @@ First, we should inspect the data to determine which variables should be used wi
 str(Insurance)
 ```
 
-The code chunk below will remove the categorical variables (gender, smoker, cities) that we can ignore for this assignment from our analysis. 
+For this assignment, we will ignore the categorical variables.  The code chunk below will remove gender, smoker, and cities from the data set. 
 
 ```{r}
 Insurance$Female <- NULL 
@@ -72,15 +72,15 @@ Insurance$Smoker <- NULL
 ```
 
 ### Center (Mean, Median)
-The variables listed below were part of our analysis and included in the following Summary of Statistical Information.
+The variables listed below were part of our analysis and are included in the following *Summary of Statistical Information*.
 
 1. **Charges**: Primary beneficiaries paid between $2,494 and $55,135.   
 
 2. **Age**:  The data output confirms that the data for Age is skewed to the right as the Mean is larger than the Median.
 
-3. **BMI**:  The data output for beneficiaries BMI is symmetrical as the Mean and Median are almost the same number. By looking at the mode will help validate this observation.  
+3. **BMI**:  The data output for beneficiaries BMI is symmetrical as the Mean and Median are almost the same number. Identifying the mode will help validate this observation.  
   
-4. **Children**: Most of the primary beneficiaries (34%) did not have dependents.
+4. **Children**: 34% of the primary beneficiaries did not have dependents.
   
 ```{r, echo=FALSE}
 Insurance %>%
@@ -95,7 +95,7 @@ type = all_continuous() ~ "continuous2"
 ### Center (Mode) & Shape {.tabset .tabset-pills}
 
 #### Distribution of Primary Beneficiary Age
-The below output is the mode for Primary Beneficiary Age data. The output indicates that the data has two modes which we can analyze further by creating a histogram graph. 
+The below output is the mode for Primary Beneficiary Age data. The output indicates that the data is bimodal which we can analyze further by creating a histogram graph. 
 
 ```{r, echo=FALSE}
 
@@ -137,7 +137,7 @@ ggp2 <- ggplot(Insurance, aes(BMI)) +
   labs(x = 'BMI', y= NULL)+
   xlim(15, 45)
 
-text2 <- paste("Text regarding BMI here break up to make pretty")
+text2 <- paste("Symmetrical Unimodal distribution with the center at 30.2")
 text.b <- ggparagraph(text = text2, face = "italic", size = 12, color = "black")
 
 ggarrange(ggp2, text.b, ncol = 1, nrow = 2 )
@@ -161,7 +161,7 @@ ggp3 <- ggplot(Insurance, aes(Children)) +
   labs(x = 'Children', y= NULL)+
    xlim(-1, 6)
 
-text3 <- paste("Text regarding children here break up to make pretty")
+text3 <- paste("Right-Skewed distribution that is positively-skewed")
 text.c <- ggparagraph(text = text3, face = "italic", size = 12, color = "black")
 
 ggarrange(ggp3, text.c, ncol = 1, nrow = 2 )
@@ -171,7 +171,7 @@ ggarrange(ggp3, text.c, ncol = 1, nrow = 2 )
 
 #### Spead of Age 
 ```{r, echo=FALSE}
-boxplot(Insurance$Age, main="Figure 1.4", xlab="Spread of Age", ylab="Years", col="Blue")
+boxplot(Insurance$Age, main="Figure 1.4 - Spread of Age", xlab="Spread of Age", ylab="Years", col="Blue")
 ```
 
 #### Spread of BMI 
