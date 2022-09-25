@@ -307,6 +307,11 @@ There is a slightly strong positive association in the linear relationship betwe
 ```{r, echo=FALSE}
 plot(Insurance$Age, Insurance$Charges, main="2.2 Relationship of Age and Expenditures", xlab="Customer's Age", ylab="Total Medical Expenditures", col="Blue")
 ```
+<br>
+<br>
+```{r, echo=FALSE}
+scatterplotMatrix(Insurance)
+```
 
 #### BMI and Expenditures
 <br>
@@ -314,12 +319,24 @@ The linear relationship between medical expenses and BMI appear to have a weak p
 ```{r, echo=FALSE}
 plot(Insurance$BMI, Insurance$Charges, main="2.3 Relationship of BMI and Expenditures", xlab="Customer's of Body Mass Index", ylab="Total Medical Expenditures", col="Red")
 ```
+<br>
+<br>
+```{r, echo=FALSE}
+scatterplotMatrix(Insurance)
+```
 
 #### Depenents and Expenditures
 <br>
 sample for 2.4
+
 ```{r, echo=FALSE}
 plot(Insurance$Children, Insurance$Charges, main="2.4 Relationship of Depenents and Expenditures", xlab="Number of Dependents", ylab="Total Medical Expenditures", col="Green")
+```
+<br>
+<br>
+
+```{r, echo=FALSE}
+scatterplotMatrix(Insurance)
 ```
 
 
