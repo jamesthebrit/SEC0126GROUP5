@@ -1,0 +1,81 @@
+---
+title: "Coding Assignment 2"
+author: "Team N"
+date: "Due: 2021-10-23 23:59"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+#Put any packages you need here
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
+
+The data on the 50 customers in the sample is as follows:
+
+-	Charges: Total medical expenses for a particular insurance plan (in dollars)
+-	Age: Age of the primary beneficiary
+-	BMI: Primary beneficiary’s body mass index (kg/m2)
+-	Female: Primary beneficiary’s birth sex (0 = Male, 1 = Female)
+-	Children: Number of children covered by health insurance plan (includes other dependents as well)
+-	Smoker: Indicator if primary beneficiary is a smoker (0 = non-smoker, 1 = smoker)
+-	Cities: Dummy variables for each city with the default being Sanford
+
+Answer the following questions using complete sentences and attach all output, plots, etc. within this report.
+
+
+```{r dataset, include=FALSE}
+insurance <- read.csv("../Data/insurance_0026_Group1.csv")
+```
+
+
+
+## Question 1
+
+Generate this regression equation:
+
+$$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}*Female + \beta_{5}*Smoker + \beta_{6}*WinterSprings + \beta_{7}*WinterPark + \beta_{8}*Oviedo$$
+
+```{r q1}
+
+```
+
+Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
+
+
+
+## Question 2
+
+Interpret the coefficients of all the independent variables that tested significant.
+
+
+## Question 3
+
+The insurance agent returns with another client:
+
+- Age: 35
+- BMI: 26
+- Children: 1
+- Gender: Female
+- Smoker: No
+- City: Sanford
+
+Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
+
+```{r q3}
+
+```
+
+## Question 4
+
+Compare the model from question 1, to a model that does not include the group of city dummies. Does including the cities reduce the SSE by a statistically significant amount? (check the partial F-test for significance of the dummies as a group). Use $\alpha = 0.05$
+
+```{r q4}
+
+```
+
+
