@@ -11,6 +11,20 @@ output:
 ```{r setup, include=FALSE}
 #Put any packages you need here
 knitr::opts_chunk$set(echo = TRUE)
+
+library(readxl)
+library(tidyverse)
+library(gt)
+library(gtsummary)
+library(plotly)
+library(readxl)
+library(corrplot)
+library("gridExtra")
+library("ggplot2")
+library(ggpubr)
+library(dplyr)
+library(car)
+library(jtools)
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -29,7 +43,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 
 ```{r dataset, include=FALSE}
-insurance <- read.csv("../Data/insurance_0026_Group1.csv")
+insurance <- read.csv("../Data/insurance_0126_Group5.csv")
 ```
 
 
@@ -40,9 +54,15 @@ Generate this regression equation:
 
 $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}*Female + \beta_{5}*Smoker + \beta_{6}*WinterSprings + \beta_{7}*WinterPark + \beta_{8}*Oviedo$$
 
-```{r q1}
 
+Based off our our model summary from the data provided our equation is as follows for annual charges; an intercept value of 
+-$13,721.51 with a coefficient value for age set at $295.68, BMI at $392.64, children at $84.60, female at $1,489.17, smoker at $21,374.71, Winter Springs at -$1,419.77, Winter Park at -$4,358.32, and Oviedo at -$2,845.19.
+
+```{r q1}
+ model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo, data = insurance)
+summ(model)
 ```
+$$Charges = -13,721.51 + 295.68(Age) + 392.64(BMI) + 84.60(Children) + 1,489.17(Female) + 21,374.71(Smoker) - 1,419.77(WinterSprings) - 4,358.32(WinterPark) - 2,845.19(Oviedo)$$
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
 
@@ -51,6 +71,8 @@ Which independent variables test significant in a two-tailed test? Use $\alpha =
 ## Question 2
 
 Interpret the coefficients of all the independent variables that tested significant.
+
+Test their significance levels. Value of the larger coefficients is what matters.
 
 
 ## Question 3
@@ -66,9 +88,13 @@ The insurance agent returns with another client:
 
 Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
 
-```{r q3}
+```{r q3, echo=FALSE}
+ newPrediction <- data.frame(Age = 35, BMI = 26, Children = 1, Female = 1, Smoker = 0, WinterSprings = 0, WinterPark = 0, Oviedo = 0)
+predict (model, newdata = newPrediction, interval = "confidence", level = .95)
 
 ```
+
+As per our regression equation, this Florida health insurance company can expect charges for this individual to annually be $9,517.64. However with a 95% confidence interval the lower bound of charges accumulated would be $5,868.46 to $13,166.82 annually.
 
 ## Question 4
 
