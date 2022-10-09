@@ -370,3 +370,7 @@ predict (model, newdata = newPrediction, interval = "confidence", level = .95)
 ```
 
 As per our regression equation, this Florida health insurance company can expect charges for this individual to annually be $11,782.35. However with a 95% confidence interval the lower bound of charges accumulated would be $8,598.57 to $14,966.13 annually.
+
+
+`Q1: Missed histogram and spread of charges variable (-2)`
+`Q2: What about relationship between independent variables? (-3)`
