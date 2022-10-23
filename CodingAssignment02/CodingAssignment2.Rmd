@@ -25,6 +25,8 @@ library(ggpubr)
 library(dplyr)
 library(car)
 library(jtools)
+library(rstatix)
+library(stats)
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -66,6 +68,16 @@ $$Charges = -13,721.51 + 295.68(Age) + 392.64(BMI) + 84.60(Children) + 1,489.17(
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
 
+``` {r q1.2, echo=FALSE}
+regsummary <- summary(model) 
+
+regsummary
+
+```
+```{r q1.6, echo=FALSE}
+t.test(insurance, alternative = c("two.sided"), conf.level = 0.80)
+
+```
 
 
 ## Question 2
@@ -132,6 +144,6 @@ summary(model_full)
 ```{r q4.3, echo=FALSE}
 anova(model_reduced, model_full)
 ```
-Including the two did reduce the SSE by a statistically significant amount, but independently, neither tested statistically significant.
+Including the two did not reduce the SSE by a statistically significant amount, but independently, both tested statistically significant.
 
 
