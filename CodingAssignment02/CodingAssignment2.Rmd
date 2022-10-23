@@ -74,7 +74,6 @@ Interpret the coefficients of all the independent variables that tested signific
 
 Test their significance levels. Value of the larger coefficients is what matters.
 
-```{r q2, echo=FALSE}
 
 In order for an independent variable to test significant the p-value must be smaller than the alpha value (confidence level).
 In this question, the alpha value is 0.2 (80% confidence level).
@@ -83,7 +82,7 @@ The following independent variables test significant at an 80% confidence level:
 - BMI (p-value = 0.04
 - Smoker (p-value = 0.00)
 - Winter Park (p-value = 0.15)
-```
+
 
 ## Question 3
 
