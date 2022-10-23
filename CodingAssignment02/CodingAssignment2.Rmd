@@ -97,6 +97,7 @@ The insurance agent returns with another client:
 - Smoker: No
 - City: Sanford
 
+
 Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
 
 ```{r q3, echo=FALSE}
