@@ -1587,6 +1587,16 @@ Use <span class="math inline">\(\alpha = 0.2\)</span></p>
 tested significant.</p>
 <p>Test their significance levels. Value of the larger coefficients is
 what matters.</p>
+<p>In order for an independent variable to test significant the p-value
+must be smaller than the alpha value (confidence level). In this
+question, the alpha value is 0.2 (80% confidence level). The following
+independent variables test significant at an 80% confidence level:</p>
+<ul>
+<li>Age (p-value = 0.00)</li>
+<li>BMI (p-value = 0.04</li>
+<li>Smoker (p-value = 0.00)</li>
+<li>Winter Park (p-value = 0.15)</li>
+</ul>
 </div>
 <div id="question-3" class="section level2">
 <h2>Question 3</h2>
@@ -1615,6 +1625,63 @@ would be $5,868.46 to $13,166.82 annually.</p>
 the group of city dummies. Does including the cities reduce the SSE by a
 statistically significant amount? (check the partial F-test for
 significance of the dummies as a group). Use <span class="math inline">\(\alpha = 0.05\)</span></p>
+<pre><code>## 
+## Call:
+## lm(formula = Charges ~ ., data = reduced_sat)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9027.0 -3062.6  -950.0   646.4 24387.7 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -12679.04    5667.67  -2.237 0.030396 *  
+## Age            284.73      74.38   3.828 0.000405 ***
+## BMI            312.82     174.65   1.791 0.080157 .  
+## Female        1070.94    1938.63   0.552 0.583457    
+## Children       -30.22     823.81  -0.037 0.970904    
+## Smoker       21845.31    2650.82   8.241 1.82e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6634 on 44 degrees of freedom
+## Multiple R-squared:  0.6914, Adjusted R-squared:  0.6563 
+## F-statistic: 19.72 on 5 and 44 DF,  p-value: 2.916e-10</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Charges ~ ., data = insurance)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10438.8  -2848.6  -1155.6    636.1  22285.2 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   -13721.51    6078.35  -2.257 0.029371 *  
+## Age              295.68      75.27   3.928 0.000321 ***
+## BMI              392.64     189.46   2.072 0.044552 *  
+## Female          1489.17    1980.51   0.752 0.456401    
+## Children          84.60     841.64   0.101 0.920427    
+## Smoker         21374.71    2751.29   7.769 1.38e-09 ***
+## WinterSprings  -1419.77    3034.10  -0.468 0.642307    
+## WinterPark     -4358.32    2959.25  -1.473 0.148447    
+## Oviedo         -2845.19    2391.63  -1.190 0.241031    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6668 on 41 degrees of freedom
+## Multiple R-squared:  0.7095, Adjusted R-squared:  0.6528 
+## F-statistic: 12.52 on 8 and 41 DF,  p-value: 7.093e-09</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: Charges ~ Age + BMI + Female + Children + Smoker
+## Model 2: Charges ~ Age + BMI + Female + Children + Smoker + WinterSprings + 
+##     WinterPark + Oviedo
+##   Res.Df        RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     44 1936512993                           
+## 2     41 1823150989  3 113362003 0.8498 0.4748</code></pre>
+<p>Including the two did reduce the SSE by a statistically significant
+amount, but independently, neither tested statistically significant.</p>
 </div>
 
 

@@ -78,10 +78,12 @@ Test their significance levels. Value of the larger coefficients is what matters
 In order for an independent variable to test significant the p-value must be smaller than the alpha value (confidence level).
 In this question, the alpha value is 0.2 (80% confidence level).
 The following independent variables test significant at an 80% confidence level:
+
 - Age (p-value = 0.00)
 - BMI (p-value = 0.04
 - Smoker (p-value = 0.00)
 - Winter Park (p-value = 0.15)
+
 
 
 ## Question 3
@@ -109,8 +111,26 @@ As per our regression equation, this Florida health insurance company can expect
 
 Compare the model from question 1, to a model that does not include the group of city dummies. Does including the cities reduce the SSE by a statistically significant amount? (check the partial F-test for significance of the dummies as a group). Use $\alpha = 0.05$
 
-```{r q4}
+```{r q4, echo=FALSE}
 
+cities <- read_xlsx("../Data/insurance_0126_Group5.xlsx")
+
+reduced_sat <- cities[,-(7:9)]
+
+model_reduced <- lm(Charges ~. , data = reduced_sat)
+
+summary(model_reduced)
 ```
+```{r q4.2, echo=FALSE}
+
+model_full <- lm(Charges ~., data = insurance)
+
+summary(model_full)
+```
+
+```{r q4.3, echo=FALSE}
+anova(model_reduced, model_full)
+```
+Including the two did reduce the SSE by a statistically significant amount, but independently, neither tested statistically significant.
 
 
