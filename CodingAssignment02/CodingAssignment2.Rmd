@@ -1,6 +1,6 @@
 ---
 title: "Coding Assignment 2"
-author: "Team N"
+author: "Team 5"
 date: "Due: 2021-10-23 23:59"
 output: 
   html_document:
@@ -58,7 +58,7 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}
 Based off our our model summary from the data provided our equation is as follows for annual charges; an intercept value of 
 -$13,721.51 with a coefficient value for age set at $295.68, BMI at $392.64, children at $84.60, female at $1,489.17, smoker at $21,374.71, Winter Springs at -$1,419.77, Winter Park at -$4,358.32, and Oviedo at -$2,845.19.
 
-```{r q1}
+```{r q1, echo=FALSE}
  model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo, data = insurance)
 summ(model)
 ```
@@ -74,6 +74,16 @@ Interpret the coefficients of all the independent variables that tested signific
 
 Test their significance levels. Value of the larger coefficients is what matters.
 
+```{r q2, echo=FALSE}
+
+In order for an independent variable to test significant the p-value must be smaller than the alpha value (confidence level).
+In this question, the alpha value is 0.2 (80% confidence level).
+The following independent variables test significant at an 80% confidence level:
+- Age (p-value = 0.00)
+- BMI (p-value = 0.04
+- Smoker (p-value = 0.00)
+- Winter Park (p-value = 0.15)
+```
 
 ## Question 3
 
