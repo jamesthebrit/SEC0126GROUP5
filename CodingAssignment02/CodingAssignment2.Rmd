@@ -27,6 +27,8 @@ library(car)
 library(jtools)
 library(rstatix)
 library(stats)
+library(xtable)
+library(knitr)
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -59,7 +61,8 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}
 
 Based off our our model summary from the data provided our equation is as follows for annual charges; an intercept value of 
 -$13,721.51 with a coefficient value for age set at $295.68, BMI at $392.64, children at $84.60, female at $1,489.17, smoker at $21,374.71, Winter Springs at -$1,419.77, Winter Park at -$4,358.32, and Oviedo at -$2,845.19.
-
+<br>
+<br>
 ```{r q1, echo=FALSE}
  model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo, data = insurance)
 summ(model)
@@ -67,17 +70,27 @@ summ(model)
 $$Charges = -13,721.51 + 295.68(Age) + 392.64(BMI) + 84.60(Children) + 1,489.17(Female) + 21,374.71(Smoker) - 1,419.77(WinterSprings) - 4,358.32(WinterPark) - 2,845.19(Oviedo)$$
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
+<br>
+<br>
 
-``` {r q1.2, echo=FALSE}
-regsummary <- summary(model) 
+``` {r q1.2, include=FALSE}
+regsummary <- summary(model)
 
 regsummary
 
 ```
-```{r q1.6, echo=FALSE}
-t.test(insurance, alternative = c("two.sided"), conf.level = 0.80)
 
+```{r q1.3, echo=FALSE}
+mod_summary_sign <- regsummary$coefficients[ , 4]  # Pull out p-values
+mod_summary_stars <- NA   
+mod_summary_stars[mod_summary_sign < 0.2] <- "Significant"
+mod_summary_stars[mod_summary_sign > 0.2] <- "Not Significant"
+names(mod_summary_stars) <- names(mod_summary_sign)
+kable(mod_summary_stars, format = "pipe", col.names = "p < 0.20", caption = "Two-Tail Test Results")
 ```
+<br>
+<br>
+
 
 
 ## Question 2
@@ -92,10 +105,21 @@ In this question, the alpha value is 0.2 (80% confidence level).
 The following independent variables test significant at an 80% confidence level:
 
 - Age (p-value = 0.00)
-- BMI (p-value = 0.04
+- BMI (p-value = 0.04)
 - Smoker (p-value = 0.00)
 - Winter Park (p-value = 0.15)
+<br>
+<br>
 
+Since Age, BMI, Smoker, and Winter Park values are the only ones that tested significant at 80%, we should look at the impact of their coefficients.
+
+If a person’s Age increases by 1, Charges are expected to increase by $295.68, give or take $96.35. 
+
+If a person’s BMI increases by 1, Charges are expected to increase by $392.64, give or take $242.51. 
+
+If a person is a Smoker, Charges are expected to increase by $21,374.71, give or take $3,521.65.
+
+If a person lives in Winter Park, Charges are expected to decrease by $4,358.32, give or take $3,787.84.
 
 
 ## Question 3
@@ -146,4 +170,6 @@ anova(model_reduced, model_full)
 ```
 Including the two did not reduce the SSE by a statistically significant amount, but independently, both tested statistically significant.
 
-
+<br>
+<br>
+The alpha value of 0.05 is not smaller than the p value 0.4748 between the two models. This result prevents us from successfully rejecting the null hypothesis. As a result, we lack sufficient data to draw the conclusion that the city factors are statistically significant.

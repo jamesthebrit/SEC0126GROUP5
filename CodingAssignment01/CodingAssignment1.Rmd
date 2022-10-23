@@ -353,7 +353,7 @@ Generate a regression equation in the following form:
 Based off our our model summary from the data provided our equation is as follows for annual charges; an intercept value of 
 -$5,962.00 with a coefficient value for age set at $346.50, BMI at $133.00, and children at $107.30.
 ```{r, echo=FALSE}
- model <- lm(Charges ~ Age + BMI + Children, data = insurance)
+ model <- lm(Charges ~ Age + BMI + Children, data = Insurance)
 summ(model)
 ```
 $$Charges = -5962.00 + 346.50(Age) + 133.00(BMI) - 107.30(Children)$$

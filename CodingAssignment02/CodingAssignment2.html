@@ -1549,7 +1549,8 @@ all output, plots, etc. within this report.</p>
 is as follows for annual charges; an intercept value of -$13,721.51 with
 a coefficient value for age set at $295.68, BMI at $392.64, children at
 $84.60, female at $1,489.17, smoker at $21,374.71, Winter Springs at
--$1,419.77, Winter Park at -$4,358.32, and Oviedo at -$2,845.19.</p>
+-$1,419.77, Winter Park at -$4,358.32, and Oviedo at -$2,845.19. <br>
+<br></p>
 <pre><code>## MODEL INFO:
 ## Observations: 50
 ## Dependent Variable: Charges
@@ -1579,33 +1580,55 @@ $84.60, female at $1,489.17, smoker at $21,374.71, Winter Springs at
 1,419.77(WinterSprings) - 4,358.32(WinterPark) -
 2,845.19(Oviedo)\]</span></p>
 <p>Which independent variables test significant in a two-tailed test?
-Use <span class="math inline">\(\alpha = 0.2\)</span></p>
-<pre><code>## 
-## Call:
-## lm(formula = Charges ~ Age + BMI + Children + Female + Smoker + 
-##     WinterSprings + WinterPark + Oviedo, data = insurance)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -10438.8  -2848.6  -1155.6    636.1  22285.2 
-## 
-## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   -13721.51    6078.35  -2.257 0.029371 *  
-## Age              295.68      75.27   3.928 0.000321 ***
-## BMI              392.64     189.46   2.072 0.044552 *  
-## Children          84.60     841.64   0.101 0.920427    
-## Female          1489.17    1980.51   0.752 0.456401    
-## Smoker         21374.71    2751.29   7.769 1.38e-09 ***
-## WinterSprings  -1419.77    3034.10  -0.468 0.642307    
-## WinterPark     -4358.32    2959.25  -1.473 0.148447    
-## Oviedo         -2845.19    2391.63  -1.190 0.241031    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 6668 on 41 degrees of freedom
-## Multiple R-squared:  0.7095, Adjusted R-squared:  0.6528 
-## F-statistic: 12.52 on 8 and 41 DF,  p-value: 7.093e-09</code></pre>
+Use <span class="math inline">\(\alpha = 0.2\)</span> <br> <br></p>
+<table>
+<caption>Two-Tail Test Results</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">p &lt; 0.20</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="left">Significant</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="left">Significant</td>
+</tr>
+<tr class="odd">
+<td align="left">BMI</td>
+<td align="left">Significant</td>
+</tr>
+<tr class="even">
+<td align="left">Children</td>
+<td align="left">Not Significant</td>
+</tr>
+<tr class="odd">
+<td align="left">Female</td>
+<td align="left">Not Significant</td>
+</tr>
+<tr class="even">
+<td align="left">Smoker</td>
+<td align="left">Significant</td>
+</tr>
+<tr class="odd">
+<td align="left">WinterSprings</td>
+<td align="left">Not Significant</td>
+</tr>
+<tr class="even">
+<td align="left">WinterPark</td>
+<td align="left">Significant</td>
+</tr>
+<tr class="odd">
+<td align="left">Oviedo</td>
+<td align="left">Not Significant</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2</h2>
@@ -1619,10 +1642,21 @@ question, the alpha value is 0.2 (80% confidence level). The following
 independent variables test significant at an 80% confidence level:</p>
 <ul>
 <li>Age (p-value = 0.00)</li>
-<li>BMI (p-value = 0.04</li>
+<li>BMI (p-value = 0.04)</li>
 <li>Smoker (p-value = 0.00)</li>
-<li>Winter Park (p-value = 0.15)</li>
+<li>Winter Park (p-value = 0.15) <br> <br></li>
 </ul>
+<p>Since Age, BMI, Smoker, and Winter Park values are the only ones that
+tested significant at 80%, we should look at the impact of their
+coefficients.</p>
+<p>If a person’s Age increases by 1, Charges are expected to increase by
+$295.68, give or take $96.35.</p>
+<p>If a person’s BMI increases by 1, Charges are expected to increase by
+$392.64, give or take $242.51.</p>
+<p>If a person is a Smoker, Charges are expected to increase by
+$21,374.71, give or take $3,521.65.</p>
+<p>If a person lives in Winter Park, Charges are expected to decrease by
+$4,358.32, give or take $3,787.84.</p>
 </div>
 <div id="question-3" class="section level2">
 <h2>Question 3</h2>
@@ -1708,6 +1742,11 @@ significance of the dummies as a group). Use <span class="math inline">\(\alpha 
 ## 2     41 1823150989  3 113362003 0.8498 0.4748</code></pre>
 <p>Including the two did not reduce the SSE by a statistically
 significant amount, but independently, both tested statistically
+significant.</p>
+<p><br> <br> The alpha value of 0.05 is not smaller than the p value
+0.4748 between the two models. This result prevents us from successfully
+rejecting the null hypothesis. As a result, we lack sufficient data to
+draw the conclusion that the city factors are statistically
 significant.</p>
 </div>
 
