@@ -137,6 +137,7 @@ As per our regression equation, this Florida health insurance company can expect
 
 <font face = Helvetica size = 2 color = black >Compare the model from question 1, to a model that does not include the group of city dummies. Does including the cities reduce the SSE by a statistically significant amount? (check the partial F-test for significance of the dummies as a group). Use $\alpha = 0.05$
 </font>
+
 ---
 
 #### Full Model
