@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Team 5" />
+<meta name="author" content="Team 5: The Fanstatic Five" />
 
 
 <title>Coding Assignment 2</title>
@@ -1510,47 +1510,45 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Coding Assignment 2</h1>
-<h4 class="author">Team 5</h4>
+<h4 class="author">Team 5: The Fanstatic Five</h4>
 <h4 class="date">Due: 2021-10-23 23:59</h4>
 
 </div>
 
 
-<p>A Florida health insurance company wants to predict annual claims for
-individual clients. The company pulls a random sample of 50 customers.
-The owner wishes to charge an actuarially fair premium to ensure a
-normal rate of return. The owner collects all of their current
-customer’s health care expenses from the last year and compares them
-with what is known about each customer’s plan.</p>
-<p>The data on the 50 customers in the sample is as follows:</p>
-<ul>
-<li>Charges: Total medical expenses for a particular insurance plan (in
-dollars)</li>
-<li>Age: Age of the primary beneficiary</li>
-<li>BMI: Primary beneficiary’s body mass index (kg/m2)</li>
-<li>Female: Primary beneficiary’s birth sex (0 = Male, 1 = Female)</li>
-<li>Children: Number of children covered by health insurance plan
-(includes other dependents as well)</li>
-<li>Smoker: Indicator if primary beneficiary is a smoker (0 =
-non-smoker, 1 = smoker)</li>
-<li>Cities: Dummy variables for each city with the default being
-Sanford</li>
-</ul>
-<p>Answer the following questions using complete sentences and attach
-all output, plots, etc. within this report.</p>
+<p><font face="Helvetica" size="2" color="black"> A Florida health
+insurance company wants to predict annual claims for individual clients.
+The company pulls a random sample of 50 customers. The owner wishes to
+charge an actuarially fair premium to ensure a normal rate of return.
+The owner collects all of their current customer’s health care expenses
+from the last year and compares them with what is known about each
+customer’s plan. <br> <br> The data on the 50 customers in the sample is
+as follows:<br> - Charges: Total medical expenses for a particular
+insurance plan (in dollars)<br> - Age: Age of the primary beneficiary
+<br> - BMI: Primary beneficiary’s body mass index (kg/m2) <br>- Female:
+Primary beneficiary’s birth sex (0 = Male, 1 = Female) <br>- Children:
+Number of children covered by health insurance plan (includes other
+dependents as well) <br>- Smoker: Indicator if primary beneficiary is a
+smoker (0 = non-smoker, 1 = smoker) <br>- Cities: Dummy variables for
+each city with the default being Sanford <br> <br> Answer the following
+questions using complete sentences and attach all output, plots, etc.
+within this report.</font></p>
 <div id="question-1" class="section level2">
 <h2>Question 1</h2>
-<p>Generate this regression equation:</p>
-<p><span class="math display">\[Charges =
-\beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children +
+<div id="generating-a-regression-equation" class="section level3">
+<h3>Generating a Regression Equation</h3>
+<p><font face="Helvetica" size="2" color="black">Generate this
+regression equation:<br> <span class="math display">\[ \scriptsize
+Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children +
 \beta_{4}*Female + \beta_{5}*Smoker + \beta_{6}*WinterSprings +
-\beta_{7}*WinterPark + \beta_{8}*Oviedo\]</span></p>
-<p>Based off our our model summary from the data provided our equation
-is as follows for annual charges; an intercept value of -$13,721.51 with
-a coefficient value for age set at $295.68, BMI at $392.64, children at
-$84.60, female at $1,489.17, smoker at $21,374.71, Winter Springs at
--$1,419.77, Winter Park at -$4,358.32, and Oviedo at -$2,845.19. <br>
-<br></p>
+\beta_{7}*WinterPark + \beta_{8}*Oviedo\]</span></font></p>
+<hr />
+<p><font face="Helvetica" size="2" color="DarkSlateBlue">Based off our
+our model summary from the data provided our equation is as follows for
+annual charges; an intercept value of -$13,721.51 with a coefficient
+value for Age set at $295.68, BMI at $392.64, Children at $84.60, Female
+at $1,489.17, Smoker at $21,374.71, Winter Springs at -$1,419.77, Winter
+Park at -$4,358.32, and Oviedo at -$2,845.19.</font> <br></p>
 <pre><code>## MODEL INFO:
 ## Observations: 50
 ## Dependent Variable: Charges
@@ -1575,71 +1573,92 @@ $84.60, female at $1,489.17, smoker at $21,374.71, Winter Springs at
 ## WinterPark             -4358.32   2959.25    -1.47   0.15
 ## Oviedo                 -2845.19   2391.63    -1.19   0.24
 ## ---------------------------------------------------------</code></pre>
-<p><span class="math display">\[Charges = -13,721.51 + 295.68(Age) +
-392.64(BMI) + 84.60(Children) + 1,489.17(Female) + 21,374.71(Smoker) -
-1,419.77(WinterSprings) - 4,358.32(WinterPark) -
-2,845.19(Oviedo)\]</span></p>
-<p>Which independent variables test significant in a two-tailed test?
-Use <span class="math inline">\(\alpha = 0.2\)</span> <br> <br></p>
+<p><font face="Helvetica" size="3" color="DarkSlateBlue"> Regression
+Equation </font></p>
+<p><strong><span class="math display">\[ \scriptsize Charges =
+-13,721.51 + 295.68(Age) + 392.64(BMI) + 84.60(Children) +
+1,489.17(Female) + 21,374.71(Smoker) - 1,419.77(WinterSprings) -
+4,358.32(WinterPark) - 2,845.19(Oviedo)\]</span></strong></p>
+</div>
+<div id="two-tailed-test" class="section level3">
+<h3>Two-Tailed Test</h3>
+<p><font face="Helvetica" size="2" color="black"> Which independent
+variables test significant in a two-tailed test? Use <span class="math inline">\(\alpha = 0.2\)</span> </font> <br></p>
+<hr />
+<p><font face="Helvetica" size="2" color="DarkSlateBlue"> The below
+results of a two-tailed test confirm that Age, BMI, Smoker, and
+WinterPark test significant at <span class="math inline">\(\alpha =
+0.2\)</span> </font></p>
 <table>
-<caption>Two-Tail Test Results</caption>
 <thead>
 <tr class="header">
-<th align="left"></th>
+<th></th>
 <th align="left">p &lt; 0.20</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">(Intercept)</td>
-<td align="left">Significant</td>
+<td>(Intercept)</td>
+<td align="left">YES, Variable is Significant</td>
 </tr>
 <tr class="even">
-<td align="left">Age</td>
-<td align="left">Significant</td>
+<td>Age</td>
+<td align="left">YES, Variable is Significant</td>
 </tr>
 <tr class="odd">
-<td align="left">BMI</td>
-<td align="left">Significant</td>
+<td>BMI</td>
+<td align="left">YES, Variable is Significant</td>
 </tr>
 <tr class="even">
-<td align="left">Children</td>
-<td align="left">Not Significant</td>
+<td>Children</td>
+<td align="left">NO, Variable is Not Significant</td>
 </tr>
 <tr class="odd">
-<td align="left">Female</td>
-<td align="left">Not Significant</td>
+<td>Female</td>
+<td align="left">NO, Variable is Not Significant</td>
 </tr>
 <tr class="even">
-<td align="left">Smoker</td>
-<td align="left">Significant</td>
+<td>Smoker</td>
+<td align="left">YES, Variable is Significant</td>
 </tr>
 <tr class="odd">
-<td align="left">WinterSprings</td>
-<td align="left">Not Significant</td>
+<td>WinterSprings</td>
+<td align="left">NO, Variable is Not Significant</td>
 </tr>
 <tr class="even">
-<td align="left">WinterPark</td>
-<td align="left">Significant</td>
+<td>WinterPark</td>
+<td align="left">YES, Variable is Significant</td>
 </tr>
 <tr class="odd">
-<td align="left">Oviedo</td>
-<td align="left">Not Significant</td>
+<td>Oviedo</td>
+<td align="left">NO, Variable is Not Significant</td>
+</tr>
+<tr class="even">
+<td><br></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td><br></td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
-<p><br> <br></p>
+</div>
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2</h2>
-<p>Interpret the coefficients of all the independent variables that
-tested significant.</p>
-<p>Test their significance levels. Value of the larger coefficients is
-what matters.</p>
-<p>In order for an independent variable to test significant the p-value
-must be smaller than the alpha value (confidence level). In this
-question, the alpha value is 0.2 (80% confidence level). The following
-independent variables test significant at an 80% confidence level:</p>
+<div id="coefficient-analysis" class="section level3">
+<h3>Coefficient Analysis</h3>
+<p><font face="Helvetica" size="2" color="black"> Interpret the
+coefficients of all the independent variables that tested significant.
+<br> Test their significance levels. Value of the larger coefficients is
+what matters.</font> <br></p>
+<hr />
+<p><font face="Helvetica" size="2" color="DarkSlateBlue"> In order for
+an independent variable to test significant, the p-value must be smaller
+than the alpha value (confidence level). In this question, the alpha
+value is 0.2 (80% confidence level). The following independent variables
+test significant at an 80% confidence level:</p>
 <ul>
 <li>Age (p-value = 0.00)</li>
 <li>BMI (p-value = 0.04)</li>
@@ -1656,57 +1675,41 @@ $392.64, give or take $242.51.</p>
 <p>If a person is a Smoker, Charges are expected to increase by
 $21,374.71, give or take $3,521.65.</p>
 <p>If a person lives in Winter Park, Charges are expected to decrease by
-$4,358.32, give or take $3,787.84.</p>
+$4,358.32, give or take $3,787.84. </font></p>
+</div>
 </div>
 <div id="question-3" class="section level2">
 <h2>Question 3</h2>
-<p>The insurance agent returns with another client:</p>
-<ul>
-<li>Age: 35</li>
-<li>BMI: 26</li>
-<li>Children: 1</li>
-<li>Gender: Female</li>
-<li>Smoker: No</li>
-<li>City: Sanford</li>
-</ul>
-<p>Using the regression equation above, predict the amount of medical
-expenses associated with this policy. (Provide a 95% confidence interval
-as well)</p>
+<div id="insurance-prediction" class="section level3">
+<h3>Insurance Prediction</h3>
+<p><font face="Helvetica" size="2" color="black"> The insurance agent
+returns with another client:<br>- Age: 35<br>- BMI: 26<br>- Children:
+1<br>- Gender: Female<br>- Smoker: No<br>- City: Sanford<br><br>Using
+the regression equation above, predict the amount of medical expenses
+associated with this policy. (Provide a 95% confidence interval as
+well)</font></p>
+<hr />
 <pre><code>##        fit     lwr      upr
 ## 1 8409.615 4053.41 12765.82</code></pre>
-<p>As per our regression equation, this Florida health insurance company
-can expect charges for this individual to annually be $9,517.64. However
-with a 95% confidence interval the lower bound of charges accumulated
-would be $5,868.46 to $13,166.82 annually.</p>
+<p><font face="Helvetica" size="2" color="DarkSlateBlue"> As per our
+regression equation, this Florida health insurance company can expect
+charges for this individual to annually be $9,517.64. However with a 95%
+confidence interval the lower bound of charges accumulated would be
+$5,868.46 to $13,166.82 annually.</font></p>
+</div>
 </div>
 <div id="question-4" class="section level2">
 <h2>Question 4</h2>
-<p>Compare the model from question 1, to a model that does not include
-the group of city dummies. Does including the cities reduce the SSE by a
-statistically significant amount? (check the partial F-test for
-significance of the dummies as a group). Use <span class="math inline">\(\alpha = 0.05\)</span></p>
-<pre><code>## 
-## Call:
-## lm(formula = Charges ~ ., data = reduced_sat)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -9027.0 -3062.6  -950.0   646.4 24387.7 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -12679.04    5667.67  -2.237 0.030396 *  
-## Age            284.73      74.38   3.828 0.000405 ***
-## BMI            312.82     174.65   1.791 0.080157 .  
-## Female        1070.94    1938.63   0.552 0.583457    
-## Children       -30.22     823.81  -0.037 0.970904    
-## Smoker       21845.31    2650.82   8.241 1.82e-10 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 6634 on 44 degrees of freedom
-## Multiple R-squared:  0.6914, Adjusted R-squared:  0.6563 
-## F-statistic: 19.72 on 5 and 44 DF,  p-value: 2.916e-10</code></pre>
+<div id="partial-f-test" class="section level3">
+<h3>Partial F-Test</h3>
+<p><font face="Helvetica" size="2" color="black">Compare the model from
+question 1, to a model that does not include the group of city dummies.
+Does including the cities reduce the SSE by a statistically significant
+amount? (check the partial F-test for significance of the dummies as a
+group). Use <span class="math inline">\(\alpha = 0.05\)</span> </font>
+—</p>
+<div id="full-model" class="section level4">
+<h4>Full Model</h4>
 <pre><code>## 
 ## Call:
 ## lm(formula = Charges ~ ., data = insurance)
@@ -1732,6 +1735,34 @@ significance of the dummies as a group). Use <span class="math inline">\(\alpha 
 ## Residual standard error: 6668 on 41 degrees of freedom
 ## Multiple R-squared:  0.7095, Adjusted R-squared:  0.6528 
 ## F-statistic: 12.52 on 8 and 41 DF,  p-value: 7.093e-09</code></pre>
+</div>
+<div id="reduced-model" class="section level4">
+<h4>Reduced Model</h4>
+<pre><code>## 
+## Call:
+## lm(formula = Charges ~ ., data = reduced_sat)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9027.0 -3062.6  -950.0   646.4 24387.7 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -12679.04    5667.67  -2.237 0.030396 *  
+## Age            284.73      74.38   3.828 0.000405 ***
+## BMI            312.82     174.65   1.791 0.080157 .  
+## Female        1070.94    1938.63   0.552 0.583457    
+## Children       -30.22     823.81  -0.037 0.970904    
+## Smoker       21845.31    2650.82   8.241 1.82e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6634 on 44 degrees of freedom
+## Multiple R-squared:  0.6914, Adjusted R-squared:  0.6563 
+## F-statistic: 19.72 on 5 and 44 DF,  p-value: 2.916e-10</code></pre>
+</div>
+<div id="model-comparison" class="section level4">
+<h4>Model Comparison</h4>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: Charges ~ Age + BMI + Female + Children + Smoker
@@ -1740,14 +1771,16 @@ significance of the dummies as a group). Use <span class="math inline">\(\alpha 
 ##   Res.Df        RSS Df Sum of Sq      F Pr(&gt;F)
 ## 1     44 1936512993                           
 ## 2     41 1823150989  3 113362003 0.8498 0.4748</code></pre>
-<p>Including the two did not reduce the SSE by a statistically
-significant amount, but independently, both tested statistically
-significant.</p>
+<p><font face="Helvetica" size="2" color="DarkSlateBlue"> Including the
+cities did not reduce the SSE by a statistically significant amount, but
+independently, both tested statistically significant.</p>
 <p><br> <br> The alpha value of 0.05 is not smaller than the p value
 0.4748 between the two models. This result prevents us from successfully
 rejecting the null hypothesis. As a result, we lack sufficient data to
-draw the conclusion that the city factors are statistically
-significant.</p>
+draw the conclusion that the city factors are statistically significant
+to the fit of the model. </font></p>
+</div>
+</div>
 </div>
 
 
