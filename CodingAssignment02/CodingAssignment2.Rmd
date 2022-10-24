@@ -166,8 +166,7 @@ anova(model_reduced, model_full)
 
 <font face = Helvetica size = 2 color = DarkSlateBlue > 
 Including the cities did not reduce the SSE by a statistically significant amount, but independently, both tested statistically significant.
+<br>
 
-<br>
-<br>
 The alpha value of 0.05 is not smaller than the p value 0.4748 between the two models. This result prevents us from successfully rejecting the null hypothesis. As a result, we lack sufficient data to draw the conclusion that the city factors are statistically significant to the fit of the model.
 </font>
