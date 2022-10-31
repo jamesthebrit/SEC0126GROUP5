@@ -1,0 +1,110 @@
+---
+title: "Coding Assignment 3"
+author: "Team N"
+date: "Due: 2021-12-09 23:59"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+#Put any packages you need here
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
+
+The data on the 50 customers in the sample is as follows:
+
+-	Charges: Total medical expenses for a particular insurance plan (in dollars)
+-	Age: Age of the primary beneficiary
+-	BMI: Primary beneficiary’s body mass index (kg/m2)
+-	Female: Primary beneficiary’s birth sex (0 = Male, 1 = Female)
+-	Children: Number of children covered by health insurance plan (includes other dependents as well)
+-	Smoker: Indicator if primary beneficiary is a smoker (0 = non-smoker, 1 = smoker)
+-	Cities: Dummy variables for each city with the default being Sanford
+
+Answer the following questions using complete sentences and attach all output, plots, etc. within this report.
+
+
+```{r dataset, include=FALSE}
+# Bring in the dataset here.
+```
+
+
+
+## Question 1
+
+Randomly select three observations from the sample and exclude from all modeling (i.e. n=47). Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 47 observations.
+
+```{r q1}
+
+
+```
+
+
+## Question 2
+
+Provide the correlation between all quantitative variables
+
+```{r}
+
+```
+
+
+## Question 3
+
+Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
+
+
+## Question 4
+
+Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
+
+```{r q3}
+
+```
+
+## Question 5
+
+Use the 3 withheld observations and calculate the performance measures for your best two models. Which is the better model? (remember that "better" depends on whether your outlook is short or long run)
+
+```{r q4}
+
+```
+
+
+## Question 6
+
+Provide interpretations of the coefficients, do the signs make sense? Perform marginal change analysis (thing 2) on the independent variables.
+
+```{r}
+
+```
+
+## Question 7
+
+An eager insurance representative comes back with five potential clients. Using the better of the two models selected above, provide the prediction intervals for the five potential clients using the information provided by the insurance rep.
+
+| Customer | Age | BMI | Female | Children | Smoker | City           |
+| -------- | --- | --- | ------ | -------- | ------ | -------------- | 
+| 1        | 60  | 22  | 1      | 0        | 0      | Oviedo         |
+| 2        | 40  | 30  | 0      | 1        | 0      | Sanford        |
+| 3        | 25  | 25  | 0      | 0        | 1      | Winter Park    |
+| 4        | 33  | 35  | 1      | 2        | 0      | Winter Springs |
+| 5        | 45  | 27  | 1      | 3        | 0      | Oviedo         |
+
+
+```{r}
+
+```
+
+## Question 8
+
+The owner notices that some of the predictions are wider than others, explain why.
+
+## Question 9 
+
+Are there any prediction problems that occur with the five potential clients? If so, explain.
+
