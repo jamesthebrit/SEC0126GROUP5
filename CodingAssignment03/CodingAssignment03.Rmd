@@ -1,6 +1,6 @@
 ---
 title: "Coding Assignment 3"
-author: "Team N"
+author: "Team 5"
 date: "Due: 2021-12-09 23:59"
 output: 
   html_document:
@@ -11,6 +11,7 @@ output:
 ```{r setup, include=FALSE}
 #Put any packages you need here
 knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -29,7 +30,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 
 ```{r dataset, include=FALSE}
-# Bring in the dataset here.
+insurance <- read.csv("../Data/insurance_0126_Group5.csv")
 ```
 
 
