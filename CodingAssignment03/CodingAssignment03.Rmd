@@ -40,8 +40,9 @@ insurance <- read.csv("../Data/insurance_0126_Group5.csv")
 Randomly select three observations from the sample and exclude from all modeling (i.e. n=47). Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 47 observations.
 
 ```{r q1}
-
-
+Performance Testng Example - In Class
+myData[-c(2, 4, 6), ]
+myData <- myData[-c(2, 4, 6), ]
 ```
 
 
@@ -50,7 +51,7 @@ Randomly select three observations from the sample and exclude from all modeling
 Provide the correlation between all quantitative variables
 
 ```{r}
-
+cor(insurance)
 ```
 
 
@@ -59,13 +60,28 @@ Provide the correlation between all quantitative variables
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
 
 
+````{r 3i}
+See Question 1 From Coding Assignment 2
+
+Model Summary
+
+Review Gauss-Markov Asssumptions And Solutions
+````
+
 ## Question 4
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
 
 ```{r q3}
-
+logInsurance
+Interaction Trm 4 - 4
 ```
+Model Specification Doc 4 . 2
+
+
+
+
+
 
 ## Question 5
 
