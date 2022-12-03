@@ -49,7 +49,7 @@ insurance$Smoker <- NULL
 ```
 
 ```{r q1.1}
-insurance.new <- insurance[-sample(1:nrow(insurance), 3), ]
+insurance.new <- insurance[-c(8, 34, 28), ]
 ```
 
 
@@ -59,10 +59,8 @@ summary(insurance.new)
 
 ```{r q1.3}
 sapply(insurance.new[,1:4], sd)
-
 ```
 
-```
 ## Question 2
 
 Provide the correlation between all quantitative variables
@@ -77,13 +75,13 @@ cor(insurance.new)
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
 
 
-````{r 3i}
+```{r 3i}
 See Question 1 From Coding Assignment 2
 
 Model Summary
 
 Review Gauss-Markov Asssumptions And Solutions
-````
+```
 
 ## Question 4
 
