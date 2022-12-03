@@ -12,6 +12,7 @@ output:
 #Put any packages you need here
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
+library(gtsummary)
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -44,7 +45,14 @@ insurance.new <- insurance[-sample(1:nrow(insurance), 3), ]
 ```
 
 ```{r q1.2}
-summary (insurance.new)
+insurance %>%
+tbl_summary(statistic = list(all_continuous() ~ c("{mean} ({sd})",
+"{median} ({p25}, {p75})",
+"{min}, {max}"),
+all_categorical() ~ "{n} / {N} ({p}%)"),
+type = all_continuous() ~ "continuous2"
+)
+```
 ```
 
 ```{r q1.3}
