@@ -41,24 +41,21 @@ insurance <- read.csv("../Data/insurance_0126_Group5.csv")
 Randomly select three observations from the sample and exclude from all modeling (i.e. n=47). Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 47 observations.
 
 ```{r q1}
-insurance$Female <- NULL 
-insurance$WinterPark <- NULL
-insurance$WinterSprings <- NULL
-insurance$Oviedo <- NULL
-insurance$Smoker <- NULL
+insurance.new <- insurance[-c(8, 34, 28), ]
+
 ```
 
 ```{r q1.1}
-insurance.new <- insurance[-c(8, 34, 28), ]
+insurance_86dummy <- insurance.new[-c(4,6,7,8,9)]
 ```
 
 
 ```{r q1.2}
-summary(insurance.new)
+summary(insurance_86dummy)
 ```
 
 ```{r q1.3}
-sapply(insurance.new[,1:4], sd)
+sapply(insurance_86dummy[,1:4], sd)
 ```
 
 ## Question 2
@@ -66,7 +63,7 @@ sapply(insurance.new[,1:4], sd)
 Provide the correlation between all quantitative variables
 
 ```{r q2.1}
-cor(insurance.new)
+cor(insurance_86dummy)
 ```
 
 
@@ -74,13 +71,14 @@ cor(insurance.new)
 
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
 
-
-```{r 3i}
 See Question 1 From Coding Assignment 2
 
 Model Summary
 
 Review Gauss-Markov Asssumptions And Solutions
+```{r q3.1i}
+model <- lm(data = insurance)
+summ(model)
 ```
 
 ## Question 4
