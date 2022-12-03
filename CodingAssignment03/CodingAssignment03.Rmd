@@ -13,6 +13,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(gtsummary)
+library(jtools)
+library(gt)
+library(car)
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -42,7 +45,6 @@ Randomly select three observations from the sample and exclude from all modeling
 
 ```{r q1}
 insurance.new <- insurance[-c(8, 34, 28), ]
-
 ```
 
 ```{r q1.1}
@@ -71,15 +73,27 @@ cor(insurance_86dummy)
 
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
 
-See Question 1 From Coding Assignment 2
 
-Model Summary
-
-Review Gauss-Markov Asssumptions And Solutions
-```{r q3.1i}
-model <- lm(data = insurance)
-summ(model)
+```{r q3.1}
+model <- lm(Charges ~., data = insurance.new)
+summary(model)
 ```
+
+
+
+```{r q3.2}
+par(mfrow=c(2,2))
+plot(model)
+```
+
+```{r q3.3}
+vif(model)
+```
+
+```{r q3.4}
+cor(insurance.new)
+```
+
 
 ## Question 4
 
