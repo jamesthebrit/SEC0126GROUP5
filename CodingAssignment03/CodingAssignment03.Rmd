@@ -40,11 +40,16 @@ insurance <- read.csv("../Data/insurance_0126_Group5.csv")
 Randomly select three observations from the sample and exclude from all modeling (i.e. n=47). Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 47 observations.
 
 ```{r q1}
-Performance Testng Example - In Class
-myData[-c(2, 4, 6), ]
-myData <- myData[-c(2, 4, 6), ]
+insurance_reduced <- insurance[ -c(2,4,6) ]
 ```
 
+```{r q1.2}
+summary (insurance_reduced)
+```
+
+```{r q1.3}
+
+```
 
 ## Question 2
 
