@@ -16,6 +16,7 @@ library(gtsummary)
 library(jtools)
 library(gt)
 library(car)
+library(corrplot)
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 50 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -90,15 +91,11 @@ summary(model)
 
 
 
-```{r q3.2}
+```{r q3.2, message=FALSE, warning=FALSE}
 par(mfrow=c(2,2))
 plot(model)
+scatterplotMatrix(insurance_86dummy)
 ```
-
-```{r q3.3, message=FALSE, warning=FALSE}
-scatterplotMatrix(insurance.new[,c(1:3,5)])
-```
-
 
 ## Question 4
 
@@ -106,19 +103,23 @@ Implement the solutions from question 3, such as data transformation, along with
 
 ```{r q4 message=FALSE, warning=FALSE}
 
-
 insurance.new$lnCharges <- log(insurance.new$Charges)
 par(mfrow=c(1,2))
 hist(insurance.new$Charges)
 hist(insurance.new$lnCharges)
-scatterplotMatrix(insurance.new[,c(10,2:3,5)])
 ```
 Model Specification Doc 4 . 2
 logInsurance
 Interaction Trm 4 - 4
 
+```{r question compare,message=FALSE, warning=FALSE}
+scatterplotMatrix(insurance.new[,c(10,2:3,5)])##see if there is another way to code this dataset instead of selecting certain columns 
+scatterplotMatrix(insurance_86dummy) ##Add titles to these charts
+##Compare these two and discuss
+```
+
 ``` {r q4 pt 2}
-model_lnCharges <- lm(lnCharges~., data = insurance.new[,c(10,2:9)])
+model_lnCharges <- lm(lnCharges~., data = insurance.new[,c(10,2:9)])##See if we want to put a summary model here
 ```
 
 ``` {r q4 pt 3, message=FALSE, warning=FALSE}
@@ -127,9 +128,21 @@ insurance.new$AgeSquared <- insurance.new$Age^2
 
 model_lnChargesAge <- lm(lnCharges~., data = insurance.new[,c(10,11,3:9)])
 
+insurance.new$lnBMI <- log(insurance.new$BMI)
+insurance.new$BMISquared <- insurance.new$BMI^2
+
+model_lnChargesBMI <- lm(lnCharges~., data = insurance.new[,c(3,4:11)])
+
+
 summary(model_lnChargesAge)
 scatterplotMatrix(insurance.new[,c(10,11,3,5)])
 scatterplotMatrix(insurance.new[,c(10,12,3,5)])
+```
+
+```{r bmi test, message=FALSE, warning=FALSE}
+summary(model_lnChargesBMI)
+scatterplotMatrix(insurance.new[,c(10,2,13,5)])
+scatterplotMatrix(insurance.new[,c(10,2,14,5)])
 ```
 
 ## Question 5
