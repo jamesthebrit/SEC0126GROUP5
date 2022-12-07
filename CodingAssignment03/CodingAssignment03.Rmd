@@ -44,7 +44,11 @@ insurance <- read.csv("../Data/insurance_0126_Group5.csv")
 Randomly select three observations from the sample and exclude from all modeling (i.e. n=47). Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 47 observations.
 
 ```{r q1}
-insurance.new <- insurance[-c(8, 34, 28), ]
+set.seed(123457)
+index <- sample(seq_len(nrow(insurance)), size = 3)
+insurance.new <- insurance[-index ,] 
+insurance.test <- insurance[index ,]
+
 ```
 
 ```{r q1.1}
@@ -65,7 +69,12 @@ sapply(insurance_86dummy[,1:4], sd)
 Provide the correlation between all quantitative variables
 
 ```{r q2.1}
-cor(insurance_86dummy)
+corrplot(cor(insurance_86dummy),
+        type = "lower",order = "hclust",
+        tl.col = "black",
+        tl.srt = 45,
+        addCoef.col = "black",
+        diag = FALSE,)
 ```
 
 
@@ -86,12 +95,8 @@ par(mfrow=c(2,2))
 plot(model)
 ```
 
-```{r q3.3}
-vif(model)
-```
-
-```{r q3.4}
-cor(insurance.new)
+```{r q3.3, message=FALSE, warning=FALSE}
+scatterplotMatrix(insurance.new[,c(1:3,5)])
 ```
 
 
@@ -99,22 +104,39 @@ cor(insurance.new)
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
 
-```{r q3}
-logInsurance
-Interaction Trm 4 - 4
+```{r q4 message=FALSE, warning=FALSE}
+
+
+insurance.new$lnCharges <- log(insurance.new$Charges)
+par(mfrow=c(1,2))
+hist(insurance.new$Charges)
+hist(insurance.new$lnCharges)
+scatterplotMatrix(insurance.new[,c(10,2:3,5)])
 ```
 Model Specification Doc 4 . 2
+logInsurance
+Interaction Trm 4 - 4
 
+``` {r q4 pt 2}
+model_lnCharges <- lm(lnCharges~., data = insurance.new[,c(10,2:9)])
+```
 
+``` {r q4 pt 3, message=FALSE, warning=FALSE}
+insurance.new$lnAge <- log(insurance.new$Age)
+insurance.new$AgeSquared <- insurance.new$Age^2
 
+model_lnChargesAge <- lm(lnCharges~., data = insurance.new[,c(10,11,3:9)])
 
-
+summary(model_lnChargesAge)
+scatterplotMatrix(insurance.new[,c(10,11,3,5)])
+scatterplotMatrix(insurance.new[,c(10,12,3,5)])
+```
 
 ## Question 5
 
 Use the 3 withheld observations and calculate the performance measures for your best two models. Which is the better model? (remember that "better" depends on whether your outlook is short or long run)
 
-```{r q4}
+```{r q5}
 
 ```
 
@@ -123,7 +145,7 @@ Use the 3 withheld observations and calculate the performance measures for your 
 
 Provide interpretations of the coefficients, do the signs make sense? Perform marginal change analysis (thing 2) on the independent variables.
 
-```{r}
+```{r q6}
 
 ```
 
@@ -140,7 +162,7 @@ An eager insurance representative comes back with five potential clients. Using 
 | 5        | 45  | 27  | 1      | 3        | 0      | Oviedo         |
 
 
-```{r}
+```{r q7}
 
 ```
 
