@@ -123,9 +123,8 @@ Interaction Trm 4 - 4
 
 ```{r q4.1 ,message=FALSE, warning=FALSE}
 insurance_LogChg86Dummy <- insurance.new[,c(10,2:3,5)]
-scatterplotMatrix(insurance_LogChg86Dummy)##see if there is another way to code this dataset instead of selecting certain columns 
-scatterplotMatrix(insurance_86dummy) ##Add titles to these charts
-##Compare these two and discuss
+scatterplotMatrix(insurance_LogChg86Dummy, main = "Log Charges (No Dummies)")
+scatterplotMatrix(insurance_86dummy, main = "Charges (No Dummies)")
 ```
 
 ``` {r q4.2}
@@ -146,7 +145,7 @@ summary(model_LogChargesNAge)#Model: Age with a logaritmic shape
 par(mfrow=c(2,2))
 plot(model_LogChargesNAge)
 scatterplotMatrix(insurance_LogChrgAge86Dummy, main = "Log Charges and Age (No Dummies)")
-scatterplotMatrix(insurance_LogChrgAgeSq86Dummy, main = "Log Charges and Age Sqd (No Dummies")
+scatterplotMatrix(insurance_LogChrgAgeSq86Dummy, main = "Log Charges and Age Sqd (No Dummies)")
 ```
 ```{r q4.4}
 model_LogChrgAgeSq <- lm(LogCharges ~., data = insurance.new[,c(12,2:10)])
@@ -280,11 +279,15 @@ mape(insurance.test$error_1, insurance.test$Charges)
 mape(insurance.test$error_2, insurance.test$Charges)
 ```
 
+The initial model performed the worst when compared to the other two. When compared to the other two, the bias, MAE, and MAPE of the logarithmic connection are lower. Since Model 2's RMSE is lower, there were no significant prediction mistakes. Depending on your preferred time frame, you could choose any model. Model 2 is appropriate if you're considering the near future. If you are considering the long term, choose Model 1.
+
+
 ## Question 6
 
 Provide interpretations of the coefficients, do the signs make sense? Perform marginal change analysis (thing 2) on the independent variables.
 
 ```{r q6}
+#Verbal Based Response
 
 ```
 
@@ -302,14 +305,16 @@ An eager insurance representative comes back with five potential clients. Using 
 
 
 ```{r q7}
-
+#Find Models And Run Indexed Variables
 ```
 
 ## Question 8
 
 The owner notices that some of the predictions are wider than others, explain why.
 
+
+Verbal Response
 ## Question 9 
 
 Are there any prediction problems that occur with the five potential clients? If so, explain.
-
+Verbal Response
