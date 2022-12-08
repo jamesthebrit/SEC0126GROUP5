@@ -288,7 +288,13 @@ Provide interpretations of the coefficients, do the signs make sense? Perform ma
 
 ```{r q6}
 #Verbal Based Response
+model_LogChrgBMISq <- lm(LogCharges ~., data = insurance.new[,c(2:10,14)])
+summary(model_LogChrgBMISq)
 
+
+##A Postiive Intercept. Age Increases In A Linear Fashion. As BMI Increases So Does Charges. If Female Charges Increases. All Locations Help Decreases Charges Unless Default At Sanford.
+
+##Of All SEEx2 Tests - Children Shows The Most Room For Error
 ```
 
 ## Question 7
@@ -306,6 +312,19 @@ An eager insurance representative comes back with five potential clients. Using 
 
 ```{r q7}
 #Find Models And Run Indexed Variables
+model_LogChrgBMISq
+
+Clients <- data.frame(
+  Age = c(60, 40, 25, 33, 45),
+  lnBMI = c(log(22), log(30), log(25), log(35), log(27)),
+  Female = c(1,0,0,1,1),
+  Children = c(0,1,0,2,3),
+  Smoker = c(0,0,1,0,0),
+  WinterSprings = c(0,0,0,1,0),
+  WinterPark = c(0,0,3,0,0),
+  Oviedo = c(1,0,0,0,1)
+  )
+predict(model_LogChrgAgeSq, newdata = clients,interval = prediction)
 ```
 
 ## Question 8
