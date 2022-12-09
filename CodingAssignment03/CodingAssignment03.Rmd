@@ -105,10 +105,20 @@ par(mfrow=c(2,2))
 plot(model)
 scatterplotMatrix(insurance_86dummy)
 ```
+3rd Assumption - Nonlineraity. Residuals v Fitted. FUNCTIONAL FORMS.
+ - Consider using ratios or percentages rather than raw data (see module on multicollinearity for a complete discussion of the associated problems and causes)
+
+6th Assumption - Normal Distribution Is Not In Place. [Normal Q-Q)]
+ - look for subgroups in data and analyze separately; use summary data (like the mean value) rather than the raw data
+ 
+4th Assumption - Heteroskedaticity Is Occuring Within Scale-Location
+
 
 ## Question 4
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
+
+Model 1 & 2 Against Bad Model
 
 ```{r q4 message=FALSE, warning=FALSE}
 
@@ -129,6 +139,7 @@ scatterplotMatrix(insurance_86dummy, main = "Charges (No Dummies)")
 
 ``` {r q4.2}
 model_LogCharges <- lm(LogCharges~., data = insurance.new[,c(10,2:9)])##See if we want to put a summary model here
+summary(model_LogCharges)
 ```
 
 ``` {r q4.3, message=FALSE, warning=FALSE}
@@ -147,13 +158,13 @@ plot(model_LogChargesNAge)
 scatterplotMatrix(insurance_LogChrgAge86Dummy, main = "Log Charges and Age (No Dummies)")
 scatterplotMatrix(insurance_LogChrgAgeSq86Dummy, main = "Log Charges and Age Sqd (No Dummies)")
 ```
+
 ```{r q4.4}
 model_LogChrgAgeSq <- lm(LogCharges ~., data = insurance.new[,c(12,2:10)])
 summary(model_LogChrgAgeSq)#Model: Age with a Quadratic Relationship
 par(mfrow=c(2,2))
 plot(model_LogChrgAgeSq)
 ```
-
 
 ```{r q4.5, message=FALSE, warning=FALSE}
 insurance.new$LogBMI <- log(insurance.new$BMI)
@@ -292,9 +303,9 @@ model_LogChrgBMISq <- lm(LogCharges ~., data = insurance.new[,c(2:10,14)])
 summary(model_LogChrgBMISq)
 
 
-##A Postiive Intercept. Age Increases In A Linear Fashion. As BMI Increases So Does Charges. If Female Charges Increases. All Locations Help Decreases Charges Unless Default At Sanford.
+##Positive Intercept. Age Increases In A Linear Fashion As Does Charges. As BMI Increases So Does Charges. If Client Is Female Charges Increases Which Makes Sense For Pregnancy Charges. All Locations Help Decreases Charges Unless Default At Sanford.
 
-##Of All SEEx2 Tests - Children Shows The Most Room For Error
+##Of All SEEx2 Tests - Children Appears To Show The Most Room For Error
 ```
 
 ## Question 7
@@ -316,24 +327,27 @@ model_LogChrgBMISq
 
 Clients <- data.frame(
   Age = c(60, 40, 25, 33, 45),
-  lnBMI = c(log(22), log(30), log(25), log(35), log(27)),
+  BMI = c(22,30,25,35,27),
+  BMISq = c(22^2),(30^2),(25^2),(35^2),(27^2),
   Female = c(1,0,0,1,1),
   Children = c(0,1,0,2,3),
   Smoker = c(0,0,1,0,0),
   WinterSprings = c(0,0,0,1,0),
-  WinterPark = c(0,0,3,0,0),
+  WinterPark = c(0,0,1,0,0),
   Oviedo = c(1,0,0,0,1)
   )
-predict(model_LogChrgAgeSq, newdata = clients,interval = prediction)
+predict(model_LogChrgBMISq, newdata = Clients,interval = "prediction")
 ```
 
 ## Question 8
 
 The owner notices that some of the predictions are wider than others, explain why.
 
+Reference Questions 1& 2
 
 Verbal Response
 ## Question 9 
 
 Are there any prediction problems that occur with the five potential clients? If so, explain.
 Verbal Response
+Reference Questions 1& 2
