@@ -44,19 +44,19 @@ insurance <- read.csv("../Data/insurance_0126_Group5.csv")
 
 Randomly select three observations from the sample and exclude from all modeling (i.e. n=47). Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 47 observations.
 
-```{r q1}
+```{r q1, echo=FALSE}
 set.seed(123457)
 index <- sample(seq_len(nrow(insurance)), size = 3)
 insurance.new <- insurance[-index ,] 
 insurance.test <- insurance[index ,]
 ```
 
-```{r q1.1}
+```{r q1.1, echo=FALSE}
 insurance_86dummy <- insurance.new[-c(4,6,7,8,9)]
 ```
 
-
-```{r q1.2}
+##### Table Summary of Quantitative Variables (except Children) for the 47 observations
+```{r q1.2, echo=FALSE}
 insurance_86dummy[,c(1:3)] %>% #this has the min, max, SD, median, and mean all
   tbl_summary(statistic = list(all_continuous() ~ c("{mean} ({sd})",
                                                     "{median} ({p25}, {p75})",
@@ -65,12 +65,12 @@ insurance_86dummy[,c(1:3)] %>% #this has the min, max, SD, median, and mean all
               type = all_continuous() ~ "continuous2"
   )
 ```
-*Children Summary Data*
-```{r q1.3}
+##### Children Summary Data
+```{r q1.3, echo=FALSE}
 summary(insurance_86dummy$Children)#summary information for children with Sd below
 ```
-*Children Standard Deviation*
-```{r q1.3.1}
+##### Children Standard Deviation
+```{r q1.3.1, echo=FALSE}
 sd(insurance_86dummy$Children)
 ```
 
@@ -78,7 +78,7 @@ sd(insurance_86dummy$Children)
 
 Provide the correlation between all quantitative variables
 
-```{r q2.1}
+```{r q2.1, echo=FALSE}
 corrplot(cor(insurance_86dummy),
         type = "lower",order = "hclust",
         tl.col = "black",
@@ -92,57 +92,58 @@ corrplot(cor(insurance_86dummy),
 
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
 
-
-```{r q3.1, message=FALSE, warning=FALSE}
+##### Summary Regression Output of all independent variables (n=47)
+```{r q3.1, message=FALSE, warning=FALSE, echo=FALSE}
 model <- lm(Charges ~., data = insurance.new)
 summary(model)
 ```
 
-
-
-```{r q3.2, message=FALSE, warning=FALSE}
+##### Plot of Insurance Data and Scatterplot Matrix of all Quantitative Variables
+```{r q3.2, message=FALSE, warning=FALSE, echo=FALSE}
 par(mfrow=c(2,2))
 plot(model)
 scatterplotMatrix(insurance_86dummy)
 ```
-3rd Assumption - Nonlineraity. Residuals v Fitted. FUNCTIONAL FORMS.
+
+
+**3rd Assumption** - Nonlineraity. Residuals v Fitted. FUNCTIONAL FORMS.
  - Consider using ratios or percentages rather than raw data (see module on multicollinearity for a complete discussion of the associated problems and causes)
 
-6th Assumption - Normal Distribution Is Not In Place. [Normal Q-Q)]
+**6th Assumption** - Normal Distribution Is Not In Place. [Normal Q-Q)]
  - look for subgroups in data and analyze separately; use summary data (like the mean value) rather than the raw data
  
-4th Assumption - Heteroskedaticity Is Occuring Within Scale-Location
+**4th Assumption** - Heteroskedaticity Is Occuring Within Scale-Location
 
 
 ## Question 4
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
 
-Model 1 & 2 Against Bad Model
-
-```{r q4 ,message=FALSE, warning=FALSE}
-
+```{r q4 ,message=FALSE, warning=FALSE, echo=FALSE}
 insurance.new$LogCharges <- log(insurance.new$Charges)
 par(mfrow=c(1,2))
 hist(insurance.new$Charges, main="Insurance Charges")
 hist(insurance.new$LogCharges, main="Log of Insurance Charges")
 ```
-Model Specification Doc 4 . 2
-logInsurance
-Interaction Trm 4 - 4
 
-```{r q4.1 ,message=FALSE, warning=FALSE}
+
+##### Scatterplot Matrix's for the Log of Charges and the Insurance Data minus Dummy Variables
+```{r q4.1 ,message=FALSE, warning=FALSE, echo=FALSE}
 insurance_LogChg86Dummy <- insurance.new[,c(10,2:3,5)]
 scatterplotMatrix(insurance_LogChg86Dummy, main = "Log Charges (No Dummies)")
 scatterplotMatrix(insurance_86dummy, main = "Charges (No Dummies)")
 ```
 
-``` {r q4.2}
+
+##### Summary Regression Model with Log of Charges
+``` {r q4.2, echo=FALSE, echo=FALSE}
 model_LogCharges <- lm(LogCharges~., data = insurance.new[,c(10,2:9)])##See if we want to put a summary model here
 summary(model_LogCharges)
 ```
 
-``` {r q4.3, message=FALSE, warning=FALSE}
+
+##### Model: Age with a logarithmic Shape
+``` {r q4.3, message=FALSE, warning=FALSE, echo=FALSE}
 insurance.new$LogAge <- log(insurance.new$Age)
 insurance.new$AgeSq <- insurance.new$Age^2
 
@@ -152,21 +153,35 @@ insurance_LogChrgAgeSq86Dummy <- insurance.new[,c(10,12,3,5)]
 
 model_LogChargesNAge <- lm(LogCharges~., data = insurance_LogChrgAgeWDummy)
 
-summary(model_LogChargesNAge)#Model: Age with a logaritmic shape
+summary(model_LogChargesNAge)#Model: Age with a logarithmic shape
+```
+
+#### Plots for Model results for Log of Charges and Log of Age 
+``` {r q4.31, message=FALSE, warning=FALSE, echo=FALSE}
 par(mfrow=c(2,2))
 plot(model_LogChargesNAge)
-scatterplotMatrix(insurance_LogChrgAge86Dummy, main = "Log Charges and Age (No Dummies)")
+```
+
+
+#### Scatterplot Martix of Log of Charges/Log of Age compared to Log of Charges and Age Squared
+```{r q4.32, message=FALSE, warning=FALSE, echo=FALSE}
+scatterplotMatrix(insurance_LogChrgAge86Dummy, main = "Log Charges and Log of Age (No Dummies)")
 scatterplotMatrix(insurance_LogChrgAgeSq86Dummy, main = "Log Charges and Age Sqd (No Dummies)")
 ```
 
-```{r q4.4}
+
+##### Model: Age with a Quadratic Relationship
+```{r q4.4, echo=FALSE}
 model_LogChrgAgeSq <- lm(LogCharges ~., data = insurance.new[,c(12,2:10)])
 summary(model_LogChrgAgeSq)#Model: Age with a Quadratic Relationship
 par(mfrow=c(2,2))
 plot(model_LogChrgAgeSq)
 ```
 
-```{r q4.5, message=FALSE, warning=FALSE}
+
+
+##### Summary Model for BMI with a Logarithmic shape 
+```{r q4.5, message=FALSE, warning=FALSE, echo=FALSE}
 insurance.new$LogBMI <- log(insurance.new$BMI)
 insurance.new$BMISq <- insurance.new$BMI^2
 
@@ -174,22 +189,68 @@ insurance_LogBMIWDummy <- insurance.new[,c(13,2,4:10)]
 insurance_LogChrgBMI86Dummy <- insurance.new[,c(2,5,10,13)]
 insurance_LogChrgBMISq86Dummy <- insurance.new[,c(2,5,10,14)]
 
-
 model_LogChrgBMIWDummy <- lm(LogCharges~., data = insurance.new[,c(2,4:10,13)])
+summary(model_LogChrgBMIWDummy)#Model: BMI with a logarithmic shape
+```
 
-summary(model_LogChrgBMIWDummy)#Model: BMI with a logaritmic shape
+
+#### Plot of Model for Log of Charges with Dummy Variables
+```{r q4.51, message=FALSE, warning=FALSE, echo=FALSE}
 par(mfrow=c(2,2))
 plot(model_LogChrgBMIWDummy)
+```
+
+
+#### Scatterplot Martix of Log of Charges/Log of BMI compared to Log of Charges and BMI Squared
+```{r q4.52, message=FALSE, warning=FALSE, echo=FALSE}
 scatterplotMatrix(insurance_LogChrgBMI86Dummy, main = "Log Charges and BMI (No Dummies)")
 scatterplotMatrix(insurance_LogChrgBMISq86Dummy, main = "Log Charges and BMI Sqd (No Dummies")
 ```
 
-```{r q4.6}
+
+##### Model: BMI with a Quadratic Relationship
+```{r q4.6, echo=FALSE}
 model_LogChrgBMISq <- lm(LogCharges ~., data = insurance.new[,c(2:10,14)])
-summary(model_LogChrgBMISq)#Model: Age with a Quadratic Relationship
+summary(model_LogChrgBMISq)#Model: BMI with a Quadratic Relationship
 par(mfrow=c(2,2))
 plot(model_LogChrgBMISq)
 ```
+
+**When applying the solutions for the Gauss-Markov Assumptions that were violated we calculated and compared the following:**
+
+1. Log of Charges 
+2. Log of Charges and Log of Age
+3. Log of Charges and Age Squared
+2. Log of Charges and Log of BMI 
+3. Log of Charges and BMI squared
+
+
+**Overall, our measure of fit for each Regression improved. Resulting in our SEE reducing from 6722 to around .40 in addition to R-Squared and Adjusted R-Squared increasing from 72 & 66 to around 80 & 75 for all models. **
+
+Below are the results coefficient significance and sign changes:
+  
+**1. Log of Charges**<br> 
+  - BMI is no longer significant<br> 
+  - Smoker is now more significant<br> 
+  - Age is now slightly more significant <br> 
+<br> 
+**2. Log of Charges and Log of Age**<br> 
+  - BMI is no longer significant<br> 
+  - Smoker is now more significant<br> 
+  - Age is now slightly more significant 
+<br>  
+**3. Log of Charges and Age Squared**<br> 
+  - BMI and Age are no longer significant<br> 
+  - Smoker is now more significant <br> 
+<br> 
+**4. Log of Charges and Log of BMI**<br> 
+  - BMI is no longer significant<br> 
+  - Age and Smoker are more significant <br> 
+<br> 
+**5. Log of Charges and BMI squared**<br> 
+  - BMI is no longer significant<br> 
+  - Age and Smoker are more significant<br> 
+<br> 
 
 ## Question 5
 
@@ -217,77 +278,58 @@ insurance.test$error_1 <- insurance.test$model_1_pred - insurance.test$Charges
 insurance.test$error_2 <- insurance.test$model_2_pred - insurance.test$Charges
 ```
 
-bias
-
-```{r q5.3} 
-# Bad Model
-mean(insurance.test$error_bm)
-
-# Model 1
-mean(insurance.test$error_1)
-
-# Model 2
-mean(insurance.test$error_2)
+##### Bias for the Bad Model, Model 1, & Model 2
+```{r q5.3, echo=FALSE} 
+mean(insurance.test$error_bm)# Bad Model
+mean(insurance.test$error_1)# Model 1
+mean(insurance.test$error_2)# Model 2
 ```
 
-MAE
 
-
-```{r}
-# I decided to create a function to calculate this
-
+```{r q5.4, echo=FALSE}
 mae <- function(error_vector){
   error_vector %>% 
   abs() %>% 
   mean()
 }
-
-# Bad Model
-mae(insurance.test$error_bm)
-
-# Model 1
-mae(insurance.test$error_1)
-
-# Model 2
-mae(insurance.test$error_2)
-
 ```
 
-RMSE
+##### MAE for the Bad Model, Model 1, & Model 2
+```{r q5.41, echo=FALSE}
+mae(insurance.test$error_bm)# Bad Model
+mae(insurance.test$error_1)# Model 1
+mae(insurance.test$error_2)# Model 2
+```
 
-```{r}
+```{r q5.5, echo=FALSE}
 rmse <- function(error_vector){
    error_vector^2 %>% 
   mean() %>% 
   sqrt()
-
 }
-
-# Bad Model
-rmse(insurance.test$error_bm)
-# Model 1
-rmse(insurance.test$error_1)
-
-# Model 2
-rmse(insurance.test$error_2)
 ```
 
-MAPE
+##### RMSE for the Bad Model, Model 1, & Model 2
+```{r q5.51, echo=FALSE}
+rmse(insurance.test$error_bm)# Bad Model
+rmse(insurance.test$error_1)# Model 1
+rmse(insurance.test$error_2)# Model 2
+```
 
-```{r}
+
+```{r q5.6, echo=FALSE}
 mape <- function(error_vector, actual_vector){
   (error_vector/actual_vector) %>% 
     abs() %>% 
     mean()
 }
+```
 
-# Bad Model
-mape(insurance.test$error_bm, insurance.test$Charges)
-# Model 1
-mape(insurance.test$error_1, insurance.test$Charges)
-
-# Model 2
-mape(insurance.test$error_2, insurance.test$Charges)
+##### MAPE for Bad Model, Model 1, & Model 2
+```{r q5.61, echo=FALSE}
+mape(insurance.test$error_bm, insurance.test$Charges) # Bad Model
+mape(insurance.test$error_1, insurance.test$Charges) # Model 1
+mape(insurance.test$error_2, insurance.test$Charges) # Model 2
 ```
 
 The initial model performed the worst when compared to the other two. When compared to the other two, the bias, MAE, and MAPE of the logarithmic connection are lower. Since Model 2's RMSE is lower, there were no significant prediction mistakes. Depending on your preferred time frame, you could choose any model. Model 2 is appropriate if you're considering the near future. If you are considering the long term, choose Model 1.
@@ -297,16 +339,18 @@ The initial model performed the worst when compared to the other two. When compa
 
 Provide interpretations of the coefficients, do the signs make sense? Perform marginal change analysis (thing 2) on the independent variables.
 
-```{r q6}
+
+##### Summary model for Log of Charges and BMI Squared 
+```{r q6, echo=FALSE}
 #Verbal Based Response
 model_LogChrgBMISq <- lm(LogCharges ~., data = insurance.new[,c(2:10,14)])
 summary(model_LogChrgBMISq)
-
-
-##Positive Intercept. Age Increases In A Linear Fashion As Does Charges. As BMI Increases So Does Charges. If Client Is Female Charges Increases Which Makes Sense For Pregnancy Charges. All Locations Help Decreases Charges Unless Default At Sanford.
-
-##Of All SEEx2 Tests - Children Appears To Show The Most Room For Error
 ```
+
+Positive Intercept. Age Increases In A Linear Fashion As Does Charges. As BMI Increases So Does Charges. If Client Is Female Charges Increases Which Makes Sense For Pregnancy Charges. All Locations Help Decreases Charges Unless Default At Sanford.
+
+Of All SEEx2 Tests - Children Appears To Show The Most Room For Error
+
 
 ## Question 7
 
@@ -321,14 +365,14 @@ An eager insurance representative comes back with five potential clients. Using 
 | 5        | 45  | 27  | 1      | 3        | 0      | Oviedo         |
 
 
-```{r q7}
+```{r q7, echo=FALSE}
 #Find Models And Run Indexed Variables
 model_LogChrgBMISq
 
 Clients <- data.frame(
   Age = c(60, 40, 25, 33, 45),
   BMI = c(22,30,25,35,27),
-  BMISq = c(22^2),(30^2),(25^2),(35^2),(27^2),
+  BMISq = c(22^2,30^2,25^2,35^2,27^2),
   Female = c(1,0,0,1,1),
   Children = c(0,1,0,2,3),
   Smoker = c(0,0,1,0,0),
@@ -336,18 +380,28 @@ Clients <- data.frame(
   WinterPark = c(0,0,1,0,0),
   Oviedo = c(1,0,0,0,1)
   )
-predict(model_LogChrgBMISq, newdata = Clients,interval = "prediction")
+
+predict(model_LogChrgBMISq, newdata = Clients,interval = "prediction") %>% exp()
+```
+```{r q2.1, echo=FALSE}
+corrplot(cor(insurance.new [-c(1,4,7:9,11:14)]),
+        type = "lower",order = "hclust",
+        tl.col = "black",
+        tl.srt = 45,
+        addCoef.col = "black",
+        diag = FALSE,)
 ```
 
 ## Question 8
 
 The owner notices that some of the predictions are wider than others, explain why.
 
-Reference Questions 1& 2
+**The largest range for the group of five customers is customer #3. They are a 25 year old male smoker with no children living in Winter Park. The second largest range was customer #1, who is a 60 year old female with no children living in Oviedo.**
+- **Due to Age and Smoker having the most significance on Charges, this the cause for the large range.**
 
-Verbal Response
 ## Question 9 
 
 Are there any prediction problems that occur with the five potential clients? If so, explain.
 Verbal Response
 Reference Questions 1& 2
+
