@@ -93,7 +93,7 @@ corrplot(cor(insurance_86dummy),
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
 
 
-```{r q3.1}
+```{r q3.1, message=FALSE, warning=FALSE}
 model <- lm(Charges ~., data = insurance.new)
 summary(model)
 ```
