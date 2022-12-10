@@ -120,7 +120,7 @@ Implement the solutions from question 3, such as data transformation, along with
 
 Model 1 & 2 Against Bad Model
 
-```{r q4 message=FALSE, warning=FALSE}
+```{r q4 ,message=FALSE, warning=FALSE}
 
 insurance.new$LogCharges <- log(insurance.new$Charges)
 par(mfrow=c(1,2))
