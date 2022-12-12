@@ -349,10 +349,17 @@ model_LogChrgBMISq <- lm(LogCharges ~., data = insurance.new[,c(2:10,14)])
 summary(model_LogChrgBMISq)
 ```
 
-Positive Intercept. Age Increases In A Linear Fashion As Do Charges. As BMI Increases So Do Charges. If Client Is Female Charges Increases Which Makes Sense For Pregnancy Charges. All Locations Help Decreases Charges Unless Default At Sanford.
+#### Break down of Coefficient Slopes
 
-Of All SEEx2 Tests - Children Appears To Show The Most Room For Error
+- Age Increases In A Linear Fashion As Do Charges.<br>
+- As BMI Increases So Do Charges. <br>
+- If Client Is Female Charges Increases Which Makes Sense For Pregnancy Charges. <br>
+- All Locations Help Decreases Charges Unless Default At Sanford.<br>
 
+#### Marginal Change Analysis 
+With using a confidence level of 95%, the below results would occur when age increases by 1 year.
+- If a person's Age increases by 1, their charges would increase by $0.04 give or take $0.01. 
+- If a person is a smoker, their charges would increase by $1.32 give or take $0.38. 
 
 ## Question 7
 
@@ -404,10 +411,9 @@ The owner notices that some of the predictions are wider than others, explain wh
 ## Question 9 
 
 Are there any prediction problems that occur with the five potential clients? If so, explain.
-Verbal Response
 
-**No prediction problems occur with the five potential potential clients.  The correlation between Charges, Age, and smoker are significant.**
+**No prediction problems occur with the five potential potential clients.  The correlation between Charges, Age, and smoker are significant.
+**The potential prediction problem outlier could occur due to Customer #4 using our Model # 1 with a r-sqaure of 80%. Due to customer #4 having the highest BMI of the group that is higher than the mean & median could indicate that Customer #4 is our outlier.**
 
-Reference Questions 1& 2
 
  
