@@ -104,16 +104,18 @@ par(mfrow=c(2,2))
 plot(model)
 scatterplotMatrix(insurance_86dummy)
 ```
+
 We ran a regression model for all independent variables and found the following violations to the Gauss-Markov Theorum Assumptions:
 
-**3rd Assumption** - Nonlinearity. Residuals v Fitted. FUNCTIONAL FORMS.
- - Consider using ratios or percentages rather than raw data (see module on multicollinearity for a complete discussion of the associated problems and causes)
+**3rd Assumption** - Non-Linearity. Residuals v Fitted. Functional Forms.
+<br> - Consider using ratios or percentages rather than raw data (see module on multicollinearity for a complete discussion of the associated problems and causes).
+
+**4th Assumption** - Heteroskedasticity Is Occurring Within Scale-Location
+<br> - There is a cluster of observations around the 2,500 to 15,000 Fitted Values axis which then fans outwards. Resulting in inefficient cross-section estimates.
 
 **6th Assumption** - Normal Distribution Is Not In Place. [Normal Q-Q)]
- - look for subgroups in data and analyze separately; use summary data (like the mean value) rather than the raw data
+<br> - Look for subgroups in data and analyze separately; use summary data (like the mean value) rather than the raw data.
  
-**4th Assumption** - Heteroskedasticity Is Occurring Within Scale-Location
-
 
 ## Question 4
 
@@ -383,7 +385,7 @@ Clients <- data.frame(
 
 predict(model_LogChrgBMISq, newdata = Clients,interval = "prediction") %>% exp()
 ```
-```{r q2.1, echo=FALSE}
+```{r q7.1, echo=FALSE}
 corrplot(cor(insurance.new [-c(1,4,7:9,11:14)]),
         type = "lower",order = "hclust",
         tl.col = "black",
